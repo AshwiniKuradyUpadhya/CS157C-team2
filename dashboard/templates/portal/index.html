@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -32,23 +31,16 @@
 			margin-left: 100px;
 			margin-right: 150px;
 		}
-		.jumbotron
-		{
-			margin-top: -100px;
-			background: transparent;
-		}
 		body
 		{
-			background-image: url("{% static 'images/homephoto1.jpg'%}");
 			height: 100%; 
 			background-position:center top;
 			background-repeat: no-repeat;
 			background-size: cover;
 			font-family: "Trebuchet MS", Helvetica, sans-serif
 		}
-	</style>
 	<!-- Hover over login button and nav buttons--!>
-	<style>
+	
 		ul {
   			list-style-type: none;
   			margin: 0;
@@ -70,7 +62,7 @@
   			color: white;
 		}
 	</style>
-	<!-- Modal Login Form --!>
+	<!--Login Form --!>
 	<style>
 		body {
 			font-family: Arial, Helvetica, sans-serif;
@@ -101,50 +93,30 @@
   			opacity: 0.8;
 		}
 
-		/* Extra styles for the cancel button */
-		.cancelbtn {
+		.cancelbutton {
   			width: auto;
   			padding: 10px 18px;
   			background-color: #f44336;
-		}
-
-		/* Center the image and position the close button */
-		.imgcontainer {
-  			text-align: center;
-  			margin: 24px 0 12px 0;
-  			position: relative;
-		}
-
-		img.avatar {
-  			width: 40%;
-  			border-radius: 50%;
 		}
 
 		.container2 {
   			padding: 16px;
 		}
 
-		span.psw {
-  			float: right;
-  			padding-top: 16px;
-		}
-
-		/* The Modal (background) */
 		.modal {
-  			display: none; /* Hidden by default */
-  			position: fixed; /* Stay in place */
-  			z-index: 1; /* Sit on top */
+  			display: none; 
+  			position: fixed; 
+  			z-index: 1; 
   			left: 0;
   			top: 0;
-  			width: 100%; /* Full width */
-  			height: 100%; /* Full height */
-  			overflow: auto; /* Enable scroll if needed */
-  			background-color: rgb(0,0,0); /* Fallback color */
-  			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  			width: 100%;
+  			height: 100%; 
+  			overflow: auto;
+  			background-color: rgb(0,0,0);
+  			background-color: rgba(0,0,0,0.4);
   			padding-top: 60px;
 		}
 
-		/* Modal Content/Box */
 		.modal-content {
   			background-color: #fefefe;
   			margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
@@ -152,7 +124,6 @@
   			width: 80%; /* Could be more or less, depending on screen size */
 		}
 
-		/* The Close Button (x) */
 		.close {
   			position: absolute;
   			right: 25px;
@@ -168,42 +139,16 @@
   			cursor: pointer;
 		}
 
-		/* Add Zoom Animation */
-		.animate {
-  			-webkit-animation: animatezoom 0.6s;
-  			animation: animatezoom 0.6s
-		}
-
-		@-webkit-keyframes animatezoom {
-  			from {-webkit-transform: scale(0)} 
-  			to {-webkit-transform: scale(1)}
-		}
-  
-		@keyframes animatezoom {
-  			from {transform: scale(0)} 
-  			to {transform: scale(1)}
-		}
-
-		/* Change styles for span and cancel button on extra small screens */
-		@media screen and (max-width: 300px) {
-  			span.psw {
-     				display: block;
-     				float: none;
-  				}
-  			.cancelbtn {
-     				width: 100%;
-  			}
 		}
 	</style>
 </head>
 
 
 <body>
-
 	<!-- logo --!>
 	<div class="text-center">
     		<a href='home.html'>
-			<img height=150px src= "{% static 'images/logo.jpeg' %}"></i></a>
+			<img height=150px src= 'images/logo.jpeg'></i></a>
 	</div>
 	
 	<!-- navigation bar --!>
@@ -215,6 +160,9 @@
 				<li class="li nav-item"><a class="nav-link" href="floorplans.html">FLOORPLANS</a></li>
 				<li class="li nav-item"><a class="nav-link" href="amenities.html">AMENITIES</a></li>
 				<li class="li nav-item"><a class="nav-link" href="gallery.html">GALLERY</a></li>
+				<li class="li nav-item"><a class="nav-link" href="maintenance.html">MAINTENANCE REQUEST</a></li>
+				<li class="li nav-item"><a class="nav-link" href="faq.html">FAQs</a></li>
+
 				<li class="li nav-item"><a class="nav-link" onclick="document.getElementById('id01').style.display='block'">RESIDENT LOGIN</a></li>
 				<li class="li nav-item"><a class="nav-link" onclick="document.getElementById('id01').style.display='block'">EMPLOYEE LOGIN</a></li>
 			</ul>
@@ -236,23 +184,23 @@
     			</ol>
     			<div class="carousel-inner">
       				<div class="item active">
-        					<img src="{% static 'images/homemarquee4.png' %}" alt="first" style="width:100%;">
+        					<img src="images/homemarquee4.png" alt="first" style="width:100%;">
       				</div>
 
       				<div class="item">
-        					<img src="{% static 'images/homemarquee2.png' %}" alt="second" style="width:100%;">
+        					<img src="images/homemarquee2.png" alt="second" style="width:100%;">
       				</div>
     
       				<div class="item">
-        					<img src="{% static 'images/homemarquee1.png' %}" alt="third" style="width:100%;">
+        					<img src="images/homemarquee1.png" alt="third" style="width:100%;">
       				</div>
 
 	      			<div class="item">
-        					<img src="{% static 'images/homemarquee3.png' %}" alt="fourth" style="width:100%;">
+        					<img src="images/homemarquee3.png" alt="fourth" style="width:100%;">
       				</div>
 	
 		      		<div class="item">
-        					<img src="{% static 'images/homemarquee5.png' %}" alt="fifth" style="width:100%;">
+        					<img src="images/homemarquee5.png" alt="fifth" style="width:100%;">
       				</div>
     			</div>
     
@@ -270,9 +218,7 @@
 
 	<div id="id01" class="modal">
   
-  		<form class="modal-content animate" method="post">
-			{% csrf_token %}
-
+  		<form class="modal-content animate" action="/action_page.php" method="post">
     		<div class="imgcontainer">
       			<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
     		</div>
@@ -291,7 +237,7 @@
     		</div>
 
     		<div class="container2" style="background-color:#f1f1f1">
-      			<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+      			<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbutton">Cancel</button>
       			<span class="psw">Forgot <a href="#">password?</a></span>
     		</div>
   		</form>
@@ -337,14 +283,13 @@
     		</div>
 
     		<div class="container2" style="background-color:#f1f1f1">
-      			<button type="button" onclick="document.getElementById('idregister').style.display='none'" class="cancelbtn">Cancel</button>
+      			<button type="button" onclick="document.getElementById('idregister').style.display='none'" class="cancelbutton">Cancel</button>
       			<span class="psw">Forgot <a href="#">password?</a></span>
     		</div>
   		</form>
 	</div>
 
 	<script>
-		// Get the modal
 		var modal = document.getElementById('id01');
 		var modalreg = document.getElementById('idregister');
 

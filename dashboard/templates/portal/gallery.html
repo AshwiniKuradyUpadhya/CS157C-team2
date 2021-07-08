@@ -23,6 +23,7 @@
                 margin-right: 150px;
                 padding-top: 3px;
                 padding-bottom: 0px;
+		background: transparent;
                 
             }
             .li {
@@ -40,13 +41,35 @@
             
             body
 			{
-				background-image: url("images/blue.png");
-				height: 100%; 
-				background-position:center;
-				width: 100%;
-				font-family: "Trebuchet MS", Helvetica, sans-serif;
-                font-size: 16px;
+			height: 100%; 
+			background-position:center top;
+			background-repeat: no-repeat;
+			background-size: cover;
+			font-family: "Trebuchet MS", Helvetica, sans-serif
 			}
+	<!-- Hover over login button and nav buttons--!>
+	<style>
+		ul {
+  			list-style-type: none;
+  			margin: 0;
+  			padding: 0;
+  			width: 1200px;
+  			background-color: #f1f1f1;
+		}
+
+		li a {
+  			display: block;
+  			color: #000;
+  			padding: 8px 16px;
+  			text-decoration: none;
+		}
+
+		/* Change the link color on hover */
+		li a:hover {
+  			background-color: #555;
+  			color: white;
+		}
+	</style>
         </style>
     </head>
     <body>
@@ -55,7 +78,7 @@
   logo created from: https://hatchful.shopify.com/ -->
         <div class="text-center">
             <a href='/home.ejs'>
-            <img height=150px src= 'images/logo_transparent.png'></i></a>
+            <img height=150px src= 'images/logo.jpeg'></i></a>
         </div>
 
 
@@ -67,8 +90,10 @@ navbar REFERENCE : https://github.com/sniklaus/teaching-webdev/blob/master/boots
                     <li class="li nav-item"><a class="nav-link" href="index.html">HOME</a></li>
                     <li class="li nav-item"><a class="nav-link" href="floorplans.html">FLOORPLANS</a></li>
                     <li class="li nav-item"><a class="nav-link" href="amenities.html">AMENITIES</a></li>
-                    <li class="li nav-item active"><a class="nav-link" href="/gallery.html">GALLERY</a></li>
-          <li class="li nav-item"><a class="nav-link" href="/location.html">CONTACT US</a></li>
+                    <li class="li nav-item active"><a class="nav-link" href="gallery.html">GALLERY</a></li>
+			<li class="li nav-item"><a class="nav-link" href="maintenance.html">MAINTENANCE REQUEST</a></li>
+			<li class="li nav-item"><a class="nav-link" href="faq.html">FAQs</a></li>
+
                     </ul>
             </div>
         </nav>

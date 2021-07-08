@@ -1,3 +1,6 @@
+<!-- Floorplan reference taken from http://chnw.org/goose-hollow-property/ -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -42,23 +45,13 @@
 			}
 		</style>
 
-	<!-- Modal Login Form --!>
+	<!--Login Form --!>
 	<style>
 		body {
 			font-family: Arial, Helvetica, sans-serif;
 		}
 
-		/* Full-width input fields */
-		input[type=text], input[type=password] {
-  			width: 100%;
-  			padding: 12px 20px;
-  			margin: 8px 0;
-  			display: inline-block;
-  			border: 1px solid #ccc;
-  			box-sizing: border-box;
-		}
-
-		/* Set a style for all buttons */
+		/*style for all buttons */
 		button {
  	 		background-color: #04AA6D;
   			color: white;
@@ -73,8 +66,8 @@
   			opacity: 0.8;
 		}
 
-		/* Extra styles for the cancel button */
-		.cancelbtn {
+
+		.cancelbutton {
   			width: auto;
   			padding: 10px 18px;
   			background-color: #f44336;
@@ -87,44 +80,31 @@
   			position: relative;
 		}
 
-		img.avatar {
-  			width: 40%;
-  			border-radius: 50%;
-		}
-
 		.container2 {
   			padding: 16px;
 		}
 
-		span.psw {
-  			float: right;
-  			padding-top: 16px;
-		}
-
-		/* The Modal (background) */
 		.modal {
-  			display: none; /* Hidden by default */
-  			position: fixed; /* Stay in place */
-  			z-index: 1; /* Sit on top */
+  			display: none; 
+  			position: fixed;
+  			z-index: 1;
   			left: 0;
   			top: 0;
-  			width: 100%; /* Full width */
-  			height: 100%; /* Full height */
-  			overflow: auto; /* Enable scroll if needed */
-  			background-color: rgb(0,0,0); /* Fallback color */
-  			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  			width: 100%; 
+  			height: 100%; 
+  			overflow: auto;
+  			background-color: rgb(0,0,0);
+  			background-color: rgba(0,0,0,0.4);
   			padding-top: 60px;
 		}
 
-		/* Modal Content/Box */
 		.modal-content {
   			background-color: #fefefe;
-  			margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  			margin: 5% auto 15% auto;
   			border: 1px solid #888;
-  			width: 80%; /* Could be more or less, depending on screen size */
+  			width: 80%; 
 		}
 
-		/* The Close Button (x) */
 		.close {
   			position: absolute;
   			right: 25px;
@@ -139,32 +119,6 @@
   			color: red;
   			cursor: pointer;
 		}
-
-		/* Add Zoom Animation */
-		.animate {
-  			-webkit-animation: animatezoom 0.6s;
-  			animation: animatezoom 0.6s
-		}
-
-		@-webkit-keyframes animatezoom {
-  			from {-webkit-transform: scale(0)} 
-  			to {-webkit-transform: scale(1)}
-		}
-  
-		@keyframes animatezoom {
-  			from {transform: scale(0)} 
-  			to {transform: scale(1)}
-		}
-
-		/* Change styles for span and cancel button on extra small screens */
-		@media screen and (max-width: 300px) {
-  			span.psw {
-     				display: block;
-     				float: none;
-  				}
-  			.cancelbtn {
-     				width: 100%;
-  			}
 		}
 	</style>
 
@@ -184,8 +138,8 @@
 					<li class="li nav-item active"><a class="nav-link" href="floorplans.html">FLOORPLANS</a></li>
 					<li class="li nav-item"><a class="nav-link" href="amenities.html">AMENITIES</a></li>
 					<li class="li nav-item"><a class="nav-link" href="gallery.html">GALLERY</a></li>
-				<li class="li nav-item"><a class="nav-link" onclick="document.getElementById('id01').style.display='block'">RESIDENT LOGIN</a></li>
-				<li class="li nav-item"><a class="nav-link" onclick="document.getElementById('id01').style.display='block'">EMPLOYEE LOGIN</a></li>
+					<li class="li nav-item"><a class="nav-link" href="maintenance.html">MAINTENANCE REQUEST</a></li>
+					<li class="li nav-item"><a class="nav-link" href="faq.html">FAQs</a></li>
 
 				</ul>
 			</div>
@@ -209,7 +163,7 @@
 				
 					<div class="col-md-4"><div class="text-center">
          			<h3>Studio</h3></div>
-					<img height=200px width = 300px src="images/studio.png">
+					<img height=200px width = 300px src="images/studio.png" onclick="document.getElementById('popupstud').style.display='block'">
 					</div>
 		</div>
 	<div id="popup1bed" class="modal">
@@ -217,7 +171,6 @@
   		<form class="modal-content animate" action="/action_page.php" method="post">
     		<div class="imgcontainer">
       			<span onclick="document.getElementById('popup1bed').style.display='none'" class="close" title="Close Modal">&times;</span>
-			<span onclick="document.getElementById('popup2bed').style.display='none'" class="close" title="Close Modal">&times;</span>
     		</div>
 
     		<div class="container2">
@@ -230,37 +183,70 @@
     		</div>
 
     		<div class="container2" style="background-color:#f1f1f1">
-      			<button type="button" onclick="document.getElementById('popup1bed').style.display='none'" class="cancelbtn">Cancel</button>
+      			<button type="button" onclick="document.getElementById('popup1bed').style.display='none'" class="cancelbutton">Cancel</button>
+    		</div>
+
+  		</form>
+	</div>
+	<div id="popup2bed" class="modal">
+  
+  		<form class="modal-content animate" action="/action_page.php" method="post">
+    		<div class="imgcontainer">
+			<span onclick="document.getElementById('popup2bed').style.display='none'" class="close" title="Close Modal">&times;</span>
     		</div>
 
     		<div class="container2">
       			<label for="uname"><b>Floorplan for 2bedroom</b></label>
       			<img height=400px width = 400px class = "center" src="images/2bed.png" name="uname">
 
-      			<label for="psw"><b>Units available : 10302, 13101, 12203</b></label>
+      			<label for="psw"><b>Units available : 10402, 13401, 12403</b></label>
         
       			<button type="submit">Apply for this Unit</button>
     		</div>
 
     		<div class="container2" style="background-color:#f1f1f1">
-      			<button type="button" onclick="document.getElementById('popup2bed').style.display='none'" class="cancelbtn">Cancel</button>
+      			<button type="button" onclick="document.getElementById('popup2bed').style.display='none'" class="cancelbutton">Cancel</button>
     		</div>
 
+  		</form>
+	</div>
+	<div id="popupstud" class="modal">
+  
+  		<form class="modal-content animate" action="/action_page.php" method="post">
+    		<div class="imgcontainer">
+			<span onclick="document.getElementById('popupstud').style.display='none'" class="close" title="Close Modal">&times;</span>
+    		</div>
 
+    		<div class="container2">
+      			<label for="uname"><b>Floorplan for Studio</b></label>
+      			<img height=400px width = 400px class = "center" src="images/studio.png" name="uname">
+
+      			<label for="psw"><b>Units available : 10101, 13101</b></label>
+        
+      			<button type="submit">Apply for this Unit</button>
+    		</div>
+
+    		<div class="container2" style="background-color:#f1f1f1">
+      			<button type="button" onclick="document.getElementById('popupstud').style.display='none'" class="cancelbutton">Cancel</button>
+    		</div>
 
   		</form>
 	</div>
 	<script>
-		// Get the modal
+
 		var onebed = document.getElementById('popup1bed');
+		var twobed = document.getElementById('popup2bed');
+		var stud = document.getElementById('popupstud');
 
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
-    			if (event.target == onebed) {
+    			if (event.target == onebed||event.target == twobed || event.target ==stud) {
         				onebed.style.display = "none";
+				twobed.style.display = "none" ;
+				stud.style.display = "none";
     			}
 		}
 	</script>
 
-		</body>
+</body>
 </html>
