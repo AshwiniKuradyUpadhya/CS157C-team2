@@ -44,6 +44,21 @@ def maintanence(request):
 def info(request):
     return render(request, 'portal/info.html')
 
+def maintenance(request):
+    return render(request, 'portal/maintenance.html')
+
+def floorplans(request):
+    return render(request, 'portal/floorplans.html')
+
+def gallery(request):
+    return render(request, 'portal/gallery.html')
+
+def faq(request):
+    return render(request, 'portal/faq.html')
+
+def amenities(request):
+    return render(request, 'portal/amenities.html')
+    
 def index(request):
     global user
     if request.method == 'POST':
