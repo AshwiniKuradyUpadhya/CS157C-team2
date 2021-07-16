@@ -1,6 +1,8 @@
 # CS157C-team2
 
 ## Info
+AWS CLI installed with aws configuration for dynamoDB webservices.
+
 dashboard/ is where the main application is.
 
 dashboard/template/ is where the .html files go. (Need to update img srcs with the django templating syntax) 

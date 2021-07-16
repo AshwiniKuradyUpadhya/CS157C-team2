@@ -40,7 +40,7 @@
 			background-size: cover;
 			font-family: "Trebuchet MS", Helvetica, sans-serif
 		}
-	<!-- Hover over login button and nav buttons--!>
+	<!-- Hover over login button and nav buttons-->
 	
 		ul {
   			list-style-type: none;
@@ -67,7 +67,7 @@
   			color: white;
 		}
 	</style>
-	<!--Login Form --!>
+	<!--Login Form -->
 	<style>
 		body {
 			font-family: Arial, Helvetica, sans-serif;
@@ -150,13 +150,13 @@
 
 
 <body>
-	<!-- logo --!>
+	<!-- logo -->
 	<div class="text-center">
     		<a href='home.html'>
 			<img height=150px src= "{% static 'images/logo.jpeg' %}"></i></a>
 	</div>
 	
-	<!-- navigation bar --!>
+	<!-- navigation bar -->
 	<nav class="navbar navbar-expand-md navbar-light bg-transparent">
 
 			<ul class="navbar-nav mr-auto">
@@ -169,7 +169,7 @@
 				<li class="li nav-item"><a class="nav-link" href="/faq">FAQs</a></li>
 
 				<li class="li nav-item"><a class="nav-link" onclick="document.getElementById('id01').style.display='block'">RESIDENT LOGIN</a></li>
-				<li class="li nav-item"><a class="nav-link" onclick="document.getElementById('id01').style.display='block'">EMPLOYEE LOGIN</a></li>
+				<li class="li nav-item"><a class="nav-link" onclick="document.getElementById('id02').style.display='block'">EMPLOYEE LOGIN</a></li>
 			</ul>
 			<ul class="navbar-nav navbar-right">
 				<button onclick="document.getElementById('idregister').style.display='block'" type="submit" class="btn btn-light btn-md">REGISTER</button>
@@ -248,6 +248,34 @@
     		</div>
   		</form>
 	</div>
+
+	<div id="id02" class="modal">
+  
+		<form class="modal-content animate" method="post">
+	  {% csrf_token %}
+		  <div class="imgcontainer">
+				<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+		  </div>
+
+		  <div class="container2">
+				<label for="landlordname"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" name="landlordname" required>
+
+				<label for="landlordpsw"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="landlordpsw" required>
+	  
+				<button type="submit">Login</button>
+				<label>
+					  <input type="checkbox" checked="checked" name="remember"> Remember me
+				</label>
+		  </div>
+
+		  <div class="container2" style="background-color:#f1f1f1">
+				<button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbutton">Cancel</button>
+				<span class="psw">Forgot <a href="#">password?</a></span>
+		  </div>
+		</form>
+  </div>
 	<div id="idregister" class="modal">
   
   		<form class="modal-content animate" action="/action_page.php" method="post">

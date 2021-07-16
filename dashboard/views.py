@@ -58,17 +58,28 @@ def faq(request):
 
 def amenities(request):
     return render(request, 'portal/amenities.html')
-    
+
 def index(request):
     global user
     if request.method == 'POST':
-        uname = request.POST['uname']
-        psw = request.POST['psw']
-        print(request.POST['uname'])
-        print(request.POST['psw'])
-        scanres = dynamodb.Table('Renter').scan(
-            FilterExpression=Attr('renter_username').eq(uname) & Attr('renter_password').eq(psw)
-            )
+        if request.POST['landlordname']:
+            uname = request.POST['landlordname']
+            psw = request.POST['landlordpsw']
+            scanres = dynamodb.Table('Landlord').scan(
+                FilterExpression=Attr('landlord_username').eq(uname) & Attr('landlord_password').eq(psw)
+                )
+            print(request.POST['landlordname'])
+            print(request.POST['landlordpsw'])
+        else:               
+            uname = request.POST['uname']
+            psw = request.POST['psw']
+            scanres = dynamodb.Table('Renter').scan(
+                FilterExpression=Attr('renter_username').eq(uname) & Attr('renter_password').eq(psw)
+                )
+            print(request.POST['uname'])
+            print(request.POST['psw'])
+
+
         if len(scanres['Items']) == 0:
             # reload page if login fail, add fail message later
             return render(request, 'portal/index.html')
