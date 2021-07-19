@@ -56,7 +56,7 @@ ROOT_URLCONF = 'residentportal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(os.path.dirname('dashboard/templates/'),'portal')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
