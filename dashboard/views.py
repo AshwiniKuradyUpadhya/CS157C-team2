@@ -23,23 +23,57 @@ def dashboard(request):
     return render(request, 'portal/dashboard.html', {'user': user})
     #return HttpResponse("Hello, world. You're at the dashboard index.")
 
-def login(request):
+def reslogin(request):
     # template = loader.get_template('./login.html')
-    context = {}
     if request.method == 'POST':
-        print(request.POST['uname'])
-        print(request.POST['psw'])
-        return redirect('/portal')
-    else:
-        return render(request, 'login/login.html', context)
+        email = request.POST['emailid']
+        apartment_number = int(request.POST['aptnumber'])
+        password = request.POST['psw']
+        table = dynamodb.Table('Renter')
+        scankeyemail = table.query(
+            KeyConditionExpression = Key('renter_id').eq(request.POST['emailid'])
+        )
+        items = scankeyemail['Items']
+        print(items)
+        if len(items) == 0:
+            return render(request, "portal/index.html")
+        else:
+            return redirect('userpage')
+
+def register(request):
+    if request.method =="POST":
+        username = request.POST['uname']
+        apartment_number = int(request.POST['aptnum'])
+        password = request.POST['psw']
+        email = request.POST['email']
+        contact = request.POST['contact']
+        table = dynamodb.Table('Renter')
+        table.put_item(
+            Item={
+                'username': username,
+                'renter_id': email,
+                'property_id': apartment_number,
+                'password': password,
+                'contact': contact,
+            }
+        )
+        response = table.get_item(
+            Key = {
+                'renter_id': email,
+                'property_id': apartment_number
+            }
+        )
+        item = response['Item']
+        print(item)
+        return redirect("userpage")
+
+def userpage(request):
+    return render(request, "userpage.html")
 
 def pay(request):
     print("USER WOULD LIKE TO PAY")
     print(user)
     return render(request, 'portal/pay.html', {'user': user})
-    
-def maintanence(request):
-    return render(request, 'portal/maintanence.html')
 
 def info(request):
     return render(request, 'portal/info.html')
@@ -58,35 +92,25 @@ def faq(request):
 
 def amenities(request):
     return render(request, 'portal/amenities.html')
-
+    
 def index(request):
-    global user
-    if request.method == 'POST':
-        if request.POST['landlordname']:
-            uname = request.POST['landlordname']
-            psw = request.POST['landlordpsw']
-            scanres = dynamodb.Table('Landlord').scan(
-                FilterExpression=Attr('landlord_username').eq(uname) & Attr('landlord_password').eq(psw)
-                )
-            print(request.POST['landlordname'])
-            print(request.POST['landlordpsw'])
-        else:               
-            uname = request.POST['uname']
-            psw = request.POST['psw']
-            scanres = dynamodb.Table('Renter').scan(
-                FilterExpression=Attr('renter_username').eq(uname) & Attr('renter_password').eq(psw)
-                )
-            print(request.POST['uname'])
-            print(request.POST['psw'])
-
-
-        if len(scanres['Items']) == 0:
-            # reload page if login fail, add fail message later
-            return render(request, 'portal/index.html')
-        else: 
-            #expect only one user & password pair so index [0] for user.
-            user = scanres['Items'][0]
-            print(user)
-            return redirect('/portal')
-    else:
-        return render(request, 'portal/index.html')
+    return render(request, "index.html")
+    # global user
+    # if request.method == 'POST':
+    #     uname = request.POST['uname']
+    #     psw = request.POST['psw']
+    #     print(request.POST['uname'])
+    #     print(request.POST['psw'])
+    #     scanres = dynamodb.Table('Renter').scan(
+    #         FilterExpression=Attr('renter_username').eq(uname) & Attr('renter_password').eq(psw)
+    #         )
+    #     if len(scanres['Items']) == 0:
+    #         # reload page if login fail, add fail message later
+    #         return render(request, 'portal/index.html')
+    #     else:
+    #         #expect only one user & password pair so index [0] for user.
+    #         user = scanres['Items'][0]
+    #         print(user)
+    #         return redirect('/portal')
+    # else:
+    #     return render(request, 'portal/index.html')
