@@ -9,6 +9,7 @@ from django.http import HttpResponse, JsonResponse
 import simplejson as json
 
 user = {}
+property = {}
 dynamodb = boto3.resource('dynamodb')
 
 
@@ -71,9 +72,13 @@ def userpage(request):
     return render(request, "userpage.html")
 
 def pay(request):
+    global property
     print("USER WOULD LIKE TO PAY")
     print(user)
-    return render(request, 'portal/pay.html', {'user': user})
+    scanres = dynamodb.Table('Property').scan(
+    FilterExpression=Attr('property_id').eq(user['property_id']))
+    property = scanres['Items'][0]
+    return render(request, 'portal/pay.html', {'user': user, 'property': property})
 
 def info(request):
     return render(request, 'portal/info.html')
