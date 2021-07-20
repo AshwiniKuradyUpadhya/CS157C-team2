@@ -10,9 +10,9 @@ urlpatterns = [
     path('amenities', views.amenities, name='amenities'),
     path('faq', views.faq, name='faq'),
     path('pay', views.pay, name='pay'),
-    path('portal', views.dashboard, name='dashboard'),
+    path('dashboard', views.dashboard, name='dashboard'),
     path('reslogin', views.reslogin, name='reslogin'),
-    path('index/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('userpage/', views.userpage, name='userpage'),
     path('register', views.register, name='register'),
 
