@@ -276,52 +276,34 @@
 		  </div>
 		</form>
   </div>
-	<div id="idregister" class="modal">
-  
-  		<form class="modal-content animate" action="/action_page.php" method="post">
-    		<div class="imgcontainer">
-      			<span onclick="document.getElementById('idregister').style.display='none'" class="close" title="Close Modal">&times;</span>
-    		</div>
+  <div id="idregister" class="modal">
+	<div class="modal-content animate">
+		<div class="imgcontainer">
+			  <span onclick="document.getElementById('idregister').style.display='none'" class="close" title="Close Modal">&times;</span>
+		</div>
 
-    		<div class="container2">
-      			<label for="uname"><b>Username</b></label>
-      			<input type="text" placeholder="Enter Username" name="uname" required>
+		<div class="container2">
+			<form method = "post" action = "{% url 'register' %}">{% csrf_token %}
 
-      			<label for="psw"><b>Password</b></label>
-      			<input type="password" placeholder="Enter Password" name="psw" required>
+			  <label for="uname"><b>Username</b></label>
+			  <input type="text" id="uname" placeholder="Enter Username" name="uname" required>
 
-      			<label for="psw"><b>Re-enter Password</b></label>
-      			<input type="password" placeholder="Confirm Password" name="psw" required>
+			<label for="aptnum"><b>Apartment_number</b></label>
+			<input type="number" id="aptnum" placeholder="Enter your Apartment number" name="aptnum" required>
 
-      			<label for="psw"><b>Email id</b></label>
-      			<input type="password" placeholder="Enter valid email address" name="psw" required>
+			  <label for="psw"><b>Password</b></label>
+			  <input type="text" id="psw" placeholder="Enter Password" name="psw" required>
 
-      			<label for="psw"><b>Contact no.</b></label>
-      			<input type="password" placeholder="Enter work/home/cell phone number" name="psw" required>
+			  <label for="email"><b>Email id</b></label>
+			  <input type="text" id="email" placeholder="Enter valid email address" name="email" required>
 
-      			<label for="psw"><b>Current Address</b></label>
-      			<input type="password" placeholder="Address Line 1" name="psw" required>
+			  <label for="contact"><b>Contact no.</b></label>
+			  <input type="number" id="contact" placeholder="Enter work/home/cell phone number" name="contact" required>
 
-      			<input type="password" placeholder="Address Line 2" name="psw" optional>
+			<input type="submit" value="Submit">
 
-      			<input type="password" placeholder="City" name="psw" required>
-
-      			<input type="password" placeholder="State" name="psw" required>
-
-      			<input type="password" placeholder="ZIP" name="psw" required>
-        
-      			<button type="submit">Register</button>
-      			<label>
-        				<input type="checkbox" checked="checked" name="remember"> Remember me
-      			</label>
-    		</div>
-
-    		<div class="container2" style="background-color:#f1f1f1">
-      			<button type="button" onclick="document.getElementById('idregister').style.display='none'" class="cancelbutton">Cancel</button>
-      			<span class="psw">Forgot <a href="#">password?</a></span>
-    		</div>
-  		</form>
-	</div>
+			</form>
+		</div>
 
 	<script>
 		var modal = document.getElementById('id01');
