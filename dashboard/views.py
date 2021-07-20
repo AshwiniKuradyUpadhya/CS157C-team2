@@ -94,23 +94,23 @@ def amenities(request):
     return render(request, 'portal/amenities.html')
     
 def index(request):
-    return render(request, "index.html")
-    # global user
-    # if request.method == 'POST':
-    #     uname = request.POST['uname']
-    #     psw = request.POST['psw']
-    #     print(request.POST['uname'])
-    #     print(request.POST['psw'])
-    #     scanres = dynamodb.Table('Renter').scan(
-    #         FilterExpression=Attr('renter_username').eq(uname) & Attr('renter_password').eq(psw)
-    #         )
-    #     if len(scanres['Items']) == 0:
-    #         # reload page if login fail, add fail message later
-    #         return render(request, 'portal/index.html')
-    #     else:
-    #         #expect only one user & password pair so index [0] for user.
-    #         user = scanres['Items'][0]
-    #         print(user)
-    #         return redirect('/portal')
-    # else:
-    #     return render(request, 'portal/index.html')
+    # return render(request, "index.html")
+    global user
+    if request.method == 'POST':
+        uname = request.POST['uname']
+        psw = request.POST['psw']
+        print(request.POST['uname'])
+        print(request.POST['psw'])
+        scanres = dynamodb.Table('Renter').scan(
+            FilterExpression=Attr('renter_username').eq(uname) & Attr('renter_password').eq(psw)
+            )
+        if len(scanres['Items']) == 0:
+            # reload page if login fail, add fail message later
+            return render(request, 'portal/index.html')
+        else:
+            #expect only one user & password pair so index [0] for user.
+            user = scanres['Items'][0]
+            print(user)
+            return redirect('/dashboard')
+    else:
+        return render(request, 'portal/index.html')
