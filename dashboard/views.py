@@ -50,7 +50,7 @@ def resident_register(request):
 def reslogin(request):
     # template = loader.get_template('./login.html')
     if request.method == 'POST':
-        email = request.POST['reemail']
+        email = request.POST['resemail']
         password = request.POST['psw']
         table = dynamodb.Table('Renter')
         scanattributes = table.scan(
