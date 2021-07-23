@@ -1,15 +1,11 @@
 from django.shortcuts import render, redirect
-from django.template import loader
 
 # Create your views here.
 import boto3
-from boto3.dynamodb.conditions import Key, Attr
+from boto3.dynamodb.conditions import Attr
 
-from django.http import HttpResponse, JsonResponse
-import simplejson as json
 
-user = {}
-property = {}
+user={}
 dynamodb = boto3.resource('dynamodb')
 
 
@@ -24,25 +20,8 @@ def dashboard(request):
     return render(request, 'portal/dashboard.html', {'user': user})
     #return HttpResponse("Hello, world. You're at the dashboard index.")
 
-def reslogin(request):
-    # template = loader.get_template('./login.html')
-    if request.method == 'POST':
-        email = request.POST['emailid']
-        apartment_number = int(request.POST['aptnumber'])
-        password = request.POST['psw']
-        table = dynamodb.Table('Renter')
-        scankeyemail = table.query(
-            KeyConditionExpression = Key('renter_id').eq(request.POST['emailid'])
-        )
-        items = scankeyemail['Items']
-        print(items)
-        if len(items) == 0:
-            return render(request, "portal/index.html")
-        else:
-            return redirect('userpage')
-
-def register(request):
-    if request.method =="POST":
+def resident_register(request):
+    if request.method == "POST":
         username = request.POST['uname']
         apartment_number = int(request.POST['aptnum'])
         password = request.POST['psw']
@@ -59,7 +38,7 @@ def register(request):
             }
         )
         response = table.get_item(
-            Key = {
+            Key={
                 'renter_id': email,
                 'property_id': apartment_number
             }
@@ -67,6 +46,61 @@ def register(request):
         item = response['Item']
         print(item)
         return redirect("userpage")
+
+def reslogin(request):
+    # template = loader.get_template('./login.html')
+    if request.method == 'POST':
+        email = request.POST['reemail']
+        password = request.POST['psw']
+        table = dynamodb.Table('Renter')
+        scanattributes = table.scan(
+            FilterExpression=Attr('renter_id').eq(email) & Attr('password').eq(password)
+        )
+        items = scanattributes['Items']
+        print(items)
+        if len(items) == 0:
+            return render(request, "portal/index.html")
+        else:
+            return redirect('userpage')
+
+def employee_register(request):
+    if request.method == "POST":
+        ename = request.POST['ename']
+        pswdd = request.POST['pswdd']
+        emailid = request.POST['emailid']
+        phone = int(request.POST['phone'])
+        table = dynamodb.Table('Employee')
+        table.put_item(
+            Item={
+                'username': ename,
+                'password': pswdd,
+                'contact': phone,
+                'employee_id': emailid,
+            }
+        )
+        response = table.get_item(
+            Key={
+                'employee_id': emailid,
+            }
+        )
+        item = response['Item']
+        print(item)
+        return redirect('userpage')
+
+def employeelogin(request):
+    if request.method == 'POST':
+        email = request.POST['empemail']
+        password = request.POST['psw']
+        table = dynamodb.Table('Employee')
+        scanattributes = table.scan(
+            FilterExpression=Attr('employee_id').eq(email) & Attr('password').eq(password)
+        )
+        items = scanattributes['Items']
+        print(items)
+        if len(items) == 0:
+            return render(request, "portal/index.html")
+        else:
+            return redirect('userpage')
 
 def userpage(request):
     return render(request, "userpage.html")
@@ -99,34 +133,4 @@ def amenities(request):
     return render(request, 'portal/amenities.html')
     
 def index(request):
-    # return render(request, "index.html")
-    global user
-    if request.method == 'POST':
-        if request.POST['landlordname']:
-            uname = request.POST['landlordname']
-            psw = request.POST['landlordpsw']
-            scanres = dynamodb.Table('Landlord').scan(
-                FilterExpression=Attr('landlord_username').eq(uname) & Attr('landlord_password').eq(psw)
-                )
-            print(request.POST['landlordname'])
-            print(request.POST['landlordpsw'])
-        else:               
-            uname = request.POST['uname']
-            psw = request.POST['psw']
-            scanres = dynamodb.Table('Renter').scan(
-                FilterExpression=Attr('renter_username').eq(uname) & Attr('renter_password').eq(psw)
-                )
-            print(request.POST['uname'])
-            print(request.POST['psw'])
-
-
-        if len(scanres['Items']) == 0:
-            # reload page if login fail, add fail message later
-            return render(request, 'portal/index.html')
-        else: 
-            #expect only one user & password pair so index [0] for user.
-            user = scanres['Items'][0]
-            print(user)
-            return redirect('/portal')
-    else:
-        return render(request, 'portal/index.html')
+    return render(request, "index.html")
