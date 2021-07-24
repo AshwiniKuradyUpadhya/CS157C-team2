@@ -40,7 +40,7 @@ def resident_register(request):
         response = table.get_item(
             Key={
                 'renter_id': email,
-                'property_id': apartment_number
+                # 'property_id': apartment_number
             }
         )
         item = response['Item']
@@ -61,7 +61,15 @@ def reslogin(request):
         if len(items) == 0:
             return render(request, "portal/index.html")
         else:
-            return redirect('userpage')
+            response = table.get_item(
+                Key={
+                    'renter_id': email,
+                }
+            )
+        item = response['Item']
+        print(item['username'])
+        # return redirect("userpage")
+        return render(request, "portal/userpage.html", {'content': item['username']})
 
 def employee_register(request):
     if request.method == "POST":
