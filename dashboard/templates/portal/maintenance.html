@@ -1,66 +1,47 @@
-<!-- 
-  Developing MAINTENANCE REQUEST section for Rental Portal Application 
--->
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
+{%load static %}
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
-        <style type="text/css">
-            .navbar {
-                margin-bottom:20px;
-                margin-top: 0px;
-                margin-left: 100px;
-                margin-right: 150px;
-                padding-top: 3px;
-                padding-bottom: 0px;
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+		.navbar {
+			margin-bottom:20px;
+			margin-top: 0px;
+			margin-left: 100px;
+			margin-right: 150px;
+			padding-top: 10px;
+			padding-bottom: 0px;
 		background: transparent;
-                
-            }
-            .li {
-                font-family: "Trebuchet MS", Helvetica, sans-serif;
-                font-size: 1em;
-                font-weight: bold;
-            }
+		}
+		.li {
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+			font-size: 1em;
+			font-weight: bold;
+		}
 
-            .container
-            {
-                margin-left: 100px;
-                margin-right: 150px;
-            }
-	h3 {
-            	text-align: center;
-	    	font-family: "Trebuchet MS", Helvetica, sans-serif;
-            	font-size: 1em;
-		font-weight: bold;
-        }
-	h4 {
-		font-family: "Trebuchet MS", Helvetica, sans-serif;
-            	font-size: 1em;
-		font-weight: bold;
-	}
-
-        .bottom-section {
-            	margin-top: 1em;
-        }
-            body
-			{
-			height: 100%; 
+		.container
+		{
+			margin-left: 100px;
+			margin-right: 150px;
+		}
+		body
+		{
+			height: 100%;
 			background-position:center top;
 			background-repeat: no-repeat;
 			background-size: cover;
 			font-family: "Trebuchet MS", Helvetica, sans-serif
-			}
-	<!-- Hover over login button and nav buttons-->
-	<style>
+		}
+	<!-- Hover over login button and nav buttons--!>
+
 		ul {
   			list-style-type: none;
   			margin: 0;
@@ -82,76 +63,144 @@
   			color: white;
 		}
 	</style>
-        </style>
+    <!--Login Form -->
+    <style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+		}
+
+		/* Full-width input fields */
+		input[type=text], input[type=password] {
+  			width: 100%;
+  			padding: 12px 20px;
+  			margin: 8px 0;
+  			display: inline-block;
+  			border: 1px solid #ccc;
+  			box-sizing: border-box;
+		}
+
+		/* Set a style for all buttons */
+		button {
+ 	 		background-color: #04AA6D;
+  			color: white;
+  			padding: 14px 20px;
+  			margin: 8px 0;
+  			border: none;
+  			cursor: pointer;
+  			width: 100%;
+		}
+
+		button:hover {
+  			opacity: 0.8;
+		}
+
+		.cancelbutton {
+  			width: auto;
+  			padding: 10px 18px;
+  			background-color: #f44336;
+		}
+
+		.container2 {
+  			padding: 16px;
+		}
+
+		.modal {
+  			display: none;
+  			position: fixed;
+  			z-index: 1;
+  			left: 0;
+  			top: 0;
+  			width: 100%;
+  			height: 100%;
+  			overflow: auto;
+  			background-color: rgb(0,0,0);
+  			background-color: rgba(0,0,0,0.4);
+  			padding-top: 60px;
+		}
+
+		.modal-content {
+  			background-color: #fefefe;
+  			margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  			border: 1px solid #888;
+  			width: 80%; /* Could be more or less, depending on screen size */
+		}
+
+		.close {
+  			position: absolute;
+  			right: 25px;
+  			top: 0;
+  			color: #000;
+  			font-size: 35px;
+  			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+  			color: red;
+  			cursor: pointer;
+		}
+
+		}
+	</style>
 </head>
 
-<!-- <body class="jumbotron d-flex align-items-center">>
+
 <body>
-<!-- company logo -->
-        <div class="text-center">
-            <a href='/index'>
-            <img height=150px src= 'images/logo.jpeg'></i></a>
-        </div>
+<!-- logo -->
+<div class="text-center">
+    <a href='home.html'>
+        <img height=150px src= "{% static 'images/logo.jpeg' %}"></a>
+</div>
 
-<!-- navigation bar
-navbar REFERENCE : https://github.com/sniklaus/teaching-webdev/blob/master/bootstrap/1-navbar.html-->
-        <nav class="navbar navbar-expand-md navbar-light bg-transparent">
-            <div class="navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="li nav-item"><a class="nav-link" href="index">HOME</a></li>
-                    <li class="li nav-item"><a class="nav-link" href="floorplans">FLOORPLANS</a></li>
-                    <li class="li nav-item"><a class="nav-link" href="amenities">AMENITIES</a></li>
-                    <li class="li nav-item"><a class="nav-link" href="gallery">GALLERY</a></li>
-		<li class="li nav-item active"><a class="nav-link" href="maintenance">MAINTENANCE REQUEST</a></li>
-		<li class="li nav-item"><a class="nav-link" href="faq">FAQs</a></li>
-                    </ul>
-            </div>
-        </nav>
+<!-- navigation bar -->
+<nav class="navbar navbar-expand-md navbar-light bg-transparent">
 
-
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h3>What request can we help you with?</h3>
-            </div>
-            <div class="col-12">
-                <h4>APARTMENT NUMBER</h4>
-            </div>
-          <div class="col-12">
-	<hr />
-                <textarea class="col-2"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 bottom-section">
-                <h4>Maintenance request Description</h4>
-                <hr />
-                <textarea class="col-12"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 bottom-section">
-                <input type="file">
-                <h4>Add photo to your request</h4>
-                <hr />
-            </div>
-        </div>
-	<div class="row">
-            <div class="col-12 bottom-section">
-                <h4>Additional comments</h4>
-                <hr />
-                <textarea class="col-12" placeholder="optional..."></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 bottom-section">
-                <a href="login.html" class="col-2 offset-md-3 btn btn-primary">BACK</a>
-                <a href="#" class="col-2 offset-md-3 btn btn-primary">CONTINUE</a>
-		<div class="col-12 bottom-section">
-            </div>
-        </div>
-
+    <div class="navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="li nav-item active"><a class="nav-link" href="/">HOME</a></li>
+            <li class="li nav-item"><a class="nav-link" href="/userpage/amenities_reservation">AMENITIES RESERVATION</a></li>
+            <li class="li nav-item"><a class="nav-link" href="/userpage/payments">PAYMENTS</a></li>
+            <li class="li nav-item"><a class="nav-link" href="/maintenance_redirect">MAINTENANCE REQUEST</a></li>
+            <li class="li nav-item"><a class="nav-link" href="/userpage/faq">FAQs</a></li>
+            <li class="li nav-item"><a class="nav-link" href="/important_numbers">IMPORTANT NUMBERS</a></li>
+        </ul>
     </div>
-</body>
+</nav>
 
+<ul class="navbar-nav navbar-right">
+    <button class="btn btn-light btn-md"><h3> Logged in as: </h3><p> {{ user.username }}</p></button>
+</ul>
+
+
+<div class="container">
+    <form method = "post" action = "{% url 'maintenance' %}">{% csrf_token %}
+
+            <h4>What request can we help you with?</h4>
+
+            <label for="apartmentnum"><b>Apartment number</b></label>
+            <input type="text" id="apartmentnum" placeholder="Enter your apartment number" name="apartmentnum" required>
+            <br>
+            <br>
+            <label for="request"><b>Maintenance Request description</b></label>
+            <input type="text" id="request" placeholder="raising maintenance request for pipeline issue" name="request" required>
+            <br>
+            <br>
+            <input type="radio" id="urgent" name="select">
+            <label for="urgent">This is Urgent</label>
+            <br>
+            <br>
+            <input type="radio" id="fewdays" name="select">
+            <label for="fewdays">Needs to be done In the next few days</label>
+            <br>
+            <br>
+            <input type="radio" id="twoweeks" name="select">
+            <label for="twoweeks">Can be done within the next two weeks</label>
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+
+    </form>
+
+</div>
+</body>
 </html>
