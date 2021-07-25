@@ -148,7 +148,7 @@
 <!-- logo -->
 <div class="text-center">
     <a href='home.html'>
-        <img height=150px src= "{% static 'images/logo.jpeg' %}"></i></a>
+        <img height=150px src= "{% static 'images/logo.jpeg' %}"></a>
 </div>
 
 <!-- navigation bar -->
@@ -159,15 +159,14 @@
             <li class="li nav-item active"><a class="nav-link" href="/">HOME</a></li>
             <li class="li nav-item"><a class="nav-link" href="/userpage/amenities_reservation">AMENITIES RESERVATION</a></li>
             <li class="li nav-item"><a class="nav-link" href="/userpage/payments">PAYMENTS</a></li>
-            <li class="li nav-item"><a class="nav-link" href="/userpage/maintenance">MAINTENANCE REQUEST</a></li>
+            <li class="li nav-item"><a class="nav-link" href="/maintenance_redirect">MAINTENANCE REQUEST</a></li>
             <li class="li nav-item"><a class="nav-link" href="/userpage/faq">FAQs</a></li>
-            <li class="li nav-item"><a class="nav-link" href="/userpage/important_numbers">IMPORTANT NUMBERS</a></li>
+            <li class="li nav-item"><a class="nav-link" href="/important_numbers">IMPORTANT NUMBERS</a></li>
         </ul>
     </div>
 </nav>
 
-{% block content %}
     <ul class="navbar-nav navbar-right">
-        <button class="btn btn-light btn-md"><h3> Logged in as: </h3><p> {{ content }}</p></button>
+        <button class="btn btn-light btn-md"><h3> Logged in as: </h3><p> {{ user.username }} </p></button>
     </ul>
-{%endblock%}
+
