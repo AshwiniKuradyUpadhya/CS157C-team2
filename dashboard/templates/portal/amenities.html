@@ -1,5 +1,6 @@
 <!-- Reference for amenities is taken from https://github.com/sniklaus/teaching-webdev -->
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -45,36 +46,31 @@
 	<body>
 
 
-<!-- code to display the website logo -->
-		<div class="text-center">
-    		<a href='index'>
-			<img height=150px src= 'images/logo.jpeg'></i></a>
-		</div>
+	<!-- code to display the website logo -->
+	<div class="text-center">
+		<a href='index'>
+			<img height=150px src= "{% static 'images/logo.jpeg' %}"></a>
+	</div>
 
 <!-- code to display navbar -->
 
 		<nav class="navbar navbar-expand-md navbar-light bg-transparent">
 			<div class="navbar-collapse">
 				<ul class="navbar-nav mr-auto">
-					<li class="li nav-item"><a class="nav-link" href="index">HOME</a></li>
+					<li class="li nav-item"><a class="nav-link" href="/">HOME</a></li>
 					<li class="li nav-item"><a class="nav-link" href="floorplans">FLOORPLANS</a></li>
 					<li class="li nav-item active"><a class="nav-link" href="amenities">AMENITIES</a></li>
 					<li class="li nav-item"><a class="nav-link" href="gallery">GALLERY</a></li>
-				<li class="li nav-item"><a class="nav-link" href="maintenance">MAINTENANCE REQUEST</a></li>
 				<li class="li nav-item"><a class="nav-link" href="faq">FAQs</a></li>
 				</ul>
 			</div>
 		</nav>
 
-
-
-			<div class="container">
-			<div class="row">
 <div class="container">
-	<div class="row content" style="margin-left: 50% ; margin-right: 0">	
-			
-			<div class="col-md-4">
-				<div class="text-left">
+	<div class="row content" style="margin-left: 50% ; margin-right: 0">
+
+				<div class="col-md-4">
+					<div class="text-left">
 						<h2>Community Amenities</h2>
 						<br>Swimming Pool
 						<br>Spa
@@ -92,8 +88,9 @@
 						<br>Minutes to San Jose International Airport
 					</div>
 				</div>
-			
-				 <div class="col-md-4"><div class="text-left">
+
+				 <div class="col-md-4">
+					 <div class="text-left">
 						<h2>Apartment Amenities</h2>
 						<br>Private Patio or Balcony
 						<br>Water, Sewer, and Garbage Included in Rent
@@ -106,16 +103,18 @@
 						<br>Stove
 						<br>Carpeted Floors
 						<br>Furnished units available
+				 	</div>
 				 </div>
-				 </div>
-			
-				<div class="col-md-4"><div class="text-left">
-						<h2>Pet Policy</h2><br> 
-						<br>Cats and Dogs - Max 2 allowed </li>
+
+				<div class="col-md-4">
+					<div class="text-left">
+						<h2>Pet Policy</h2><br>
+						<br>Cats and Dogs - Max 2 allowed
 						<br>$200 Refundable Deposit.
-				</div>	</div>
+					</div>
 				</div>
-				</div>
+	</div>
+</div>
 
 </body>
 </html>
