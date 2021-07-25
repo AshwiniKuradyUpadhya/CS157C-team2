@@ -20,6 +20,52 @@ def dashboard(request):
     return render(request, 'portal/dashboard.html', {'user': user})
     #return HttpResponse("Hello, world. You're at the dashboard index.")
 
+def employeedashboard(request):
+    global user
+    global dynamodb
+    renterTable = dynamodb.Table('Renter')
+    maintenanceTable = dynamodb.Table('Maintenance')
+    amenitiesTable = dynamodb.Table('Amenities')
+    propertyTable = dynamodb.Table('Property')
+    scanAllRenter = renterTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    scanAllRenter.get('Items')
+    scanUnpaidRenter = renterTable.scan(
+        FilterExpression=Attr('paid').eq("false")
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    scanMaintenanceRequest = maintenanceTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    updateFixedMaintenance = maintenanceTable.update_item(
+        Key={
+            'property_id': propid,
+            'renter_id': resid
+        },
+        UpdateExpression = "set maintainence_fixed = true"
+    )
+    scanAmenities = amenitiesTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+
+    scanProperty = propertyTable.scan(
+         #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+
+    # unoccupied properties
+    scanUnoccupiedProp = propertyTable.scan(
+        FilterExpression=Attr('property_availability').eq('true')
+    )
+
+    updateRentAmount = propertyTable.update_item(
+        Key={
+            'property_id': propid
+        },
+        UpdateExpression = "set rent " + rentamount
+    )
+
+
 def resident_register(request):
     if request.method == "POST":
         username = request.POST['uname']
@@ -96,6 +142,7 @@ def employee_register(request):
         return redirect('userpage')
 
 def employeelogin(request):
+    global user
     if request.method == 'POST':
         email = request.POST['empemail']
         password = request.POST['psw']
@@ -104,14 +151,29 @@ def employeelogin(request):
             FilterExpression=Attr('employee_id').eq(email) & Attr('password').eq(password)
         )
         items = scanattributes['Items']
-        print(items)
         if len(items) == 0:
             return render(request, "portal/index.html")
         else:
-            return redirect('userpage')
+            user = items[0]
+            print(user)
+            return redirect('employeepage')
+            #return render(request, 'portal/employeepage.html', {'user':user})
 
 def userpage(request):
     return render(request, "userpage.html")
+
+def employeepage(request):
+    global user
+    global dynamodb
+    renterTable = dynamodb.Table('Renter')
+    maintenanceTable = dynamodb.Table('Maintenance')
+    amenitiesTable = dynamodb.Table('Amenities')
+    propertyTable = dynamodb.Table('Property')
+    scanAllRenter = renterTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    renters = scanAllRenter.get('Items')
+    return render(request, "employeepage.html", {'user':user, 'renters': renters})
 
 def pay(request):
     global property

@@ -19,4 +19,6 @@ urlpatterns = [
     path('important_numbers', views.important_numbers, name = 'important_numbers'),
     path('', views.index, name='index'),
     path('userpage/', views.userpage, name='userpage'),
+    path('employeepage', views.employeepage, name='employeepage'),
+
 ]
