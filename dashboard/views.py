@@ -49,6 +49,7 @@ def resident_register(request):
 
 def reslogin(request):
     # template = loader.get_template('./login.html')
+    global user
     if request.method == 'POST':
         email = request.POST['resemail']
         password = request.POST['psw']
@@ -66,10 +67,9 @@ def reslogin(request):
                     'renter_id': email,
                 }
             )
-        item = response['Item']
-        print(item['username'])
+        user = response['Item']
         # return redirect("userpage")
-        return render(request, "portal/userpage.html", {'content': item['username']})
+        return render(request, "portal/userpage.html", {'user': user})
 
 def employee_register(request):
     if request.method == "POST":
@@ -125,8 +125,39 @@ def pay(request):
 def info(request):
     return render(request, 'portal/info.html')
 
+def maintenance_redirect(request):
+    return render(request, 'portal/maintenance.html',{'user': user})
+
 def maintenance(request):
-    return render(request, 'portal/maintenance.html')
+    global user
+    global maintenance
+    print(user['username'])
+    if request.method == 'POST':
+        aptnum = int(request.POST['apartmentnum'])
+        description = request.POST['request']
+        urgency = request.POST['select']
+        table = dynamodb.Table('Maintenance')
+        table.put_item(
+            Item={
+                'property_id': aptnum,
+                'renter_id': user['renter_id'],
+                'request_description': description,
+                'urgency': urgency,
+            }
+        )
+        response = table.get_item(
+            Key={
+                'renter_id': "resident1",
+                'property_id': aptnum,
+            }
+        )
+        item = response['Item']
+        print(item)
+        return render(request, 'userpage.html',{'user': user})
+
+def important_numbers(request):
+    return render(request, 'portal/important_numbers.html', {'user': user})
+
 
 def floorplans(request):
     return render(request, 'portal/floorplans.html')
