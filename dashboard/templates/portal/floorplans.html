@@ -2,6 +2,7 @@
 
 
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -124,21 +125,20 @@
 
 	</head>
 	<body>
-		
-		<div class="text-center">
-    		<a href='index'>
-			<img height=150px src= 'images/logo.jpeg'></i></a>
-		</div>
+
+	<div class="text-center">
+		<a href='index'>
+			<img height=150px src= "{% static 'images/logo.jpeg' %}"></a>
+	</div>
 
 
 		<nav class="navbar navbar-expand-md navbar-light bg-transparent">
 			<div class="navbar-collapse">
 				<ul class="navbar-nav mr-auto">
-					<li class="li nav-item"><a class="nav-link" href="index">HOME</a></li>
+					<li class="li nav-item"><a class="nav-link" href="/">HOME</a></li>
 					<li class="li nav-item active"><a class="nav-link" href="floorplans">FLOORPLANS</a></li>
 					<li class="li nav-item"><a class="nav-link" href="amenities">AMENITIES</a></li>
 					<li class="li nav-item"><a class="nav-link" href="gallery">GALLERY</a></li>
-					<li class="li nav-item"><a class="nav-link" href="maintenance">MAINTENANCE REQUEST</a></li>
 					<li class="li nav-item"><a class="nav-link" href="faq">FAQs</a></li>
 
 				</ul>
@@ -151,21 +151,24 @@
 					<div class="text-center">
 					<h3>1 Bedroom</h3>
 					</div>
-					<img height=200px width = 200px src="images/1bed.png" onclick="document.getElementById('popup1bed').style.display='block'">
+					<img height=200px width = 200px src="{% static 'images/1bed.png' %}" onclick="document.getElementById('popup1bed').style.display='block'">
 				</div>
 				
 				<div class="col-md-4">
 					<div class="text-center">
           				<h3>2 Bedroom</h3>
 					</div>
-					<img height=200px width = 200px src="images/2bed.png" onclick="document.getElementById('popup2bed').style.display='block'">
+					<img height=200px width = 200px src="{% static 'images/2bed.png' %}" onclick="document.getElementById('popup2bed').style.display='block'">
 				</div>
 				
-					<div class="col-md-4"><div class="text-center">
-         			<h3>Studio</h3></div>
-					<img height=200px width = 300px src="images/studio.png" onclick="document.getElementById('popupstud').style.display='block'">
+					<div class="col-md-4">
+						<div class="text-center">
+         					<h3>Studio</h3>
+						</div>
+					<img height=200px width = 300px src="{% static 'images/studio.png' %}" onclick="document.getElementById('popupstud').style.display='block'">
 					</div>
-		</div>
+			</div>
+			</div>
 	<div id="popup1bed" class="modal">
   
   		<form class="modal-content animate" action="/action_page.php" method="post">
@@ -175,7 +178,7 @@
 
     		<div class="container2">
       			<label for="uname"><b>Floorplan for 1bedroom</b></label>
-      			<img height=400px width = 400px class = "center" src="images/1bed.png" name="uname">
+      			<img height=400px width = 400px class = "center" src="{% static 'images/1bed.png' %}" name="uname">
 
       			<label for="psw"><b>Units available : 10302, 13101, 12203</b></label>
         
@@ -188,6 +191,7 @@
 
   		</form>
 	</div>
+
 	<div id="popup2bed" class="modal">
   
   		<form class="modal-content animate" action="/action_page.php" method="post">
@@ -197,7 +201,7 @@
 
     		<div class="container2">
       			<label for="uname"><b>Floorplan for 2bedroom</b></label>
-      			<img height=400px width = 400px class = "center" src="images/2bed.png" name="uname">
+      			<img height=400px width = 400px class = "center" src="{% static 'images/2bed.png' %}" name="uname">
 
       			<label for="psw"><b>Units available : 10402, 13401, 12403</b></label>
         
@@ -210,6 +214,7 @@
 
   		</form>
 	</div>
+
 	<div id="popupstud" class="modal">
   
   		<form class="modal-content animate" action="/action_page.php" method="post">
@@ -219,7 +224,7 @@
 
     		<div class="container2">
       			<label for="uname"><b>Floorplan for Studio</b></label>
-      			<img height=400px width = 400px class = "center" src="images/studio.png" name="uname">
+      			<img height=400px width = 400px class = "center" src="{% static 'images/studio.png' %}" name="uname">
 
       			<label for="psw"><b>Units available : 10101, 13101</b></label>
         
@@ -232,6 +237,7 @@
 
   		</form>
 	</div>
+
 	<script>
 
 		var onebed = document.getElementById('popup1bed');
