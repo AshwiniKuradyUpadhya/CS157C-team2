@@ -166,7 +166,7 @@ def gallery(request):
     return render(request, 'portal/gallery.html')
 
 def faq(request):
-    return render(request, 'portal/faq.html')
+    return render(request, 'portal/FAQ.html')
 
 def amenities(request):
     return render(request, 'portal/amenities.html')
