@@ -157,10 +157,10 @@
     <div class="navbar-collapse">
         <ul class="navbar-nav mr-auto">
             <li class="li nav-item active"><a class="nav-link" href="/">HOME</a></li>
-            <li class="li nav-item"><a class="nav-link" onclick="showRenters()">View Renters</a></li>
-            <li class="li nav-item"><a class="nav-link" href="">View Properties</a></li>
-            <li class="li nav-item"><a class="nav-link" href="">View Amenities</a></li>
-            <li class="li nav-item"><a class="nav-link" onclick="showMaintR()">View Maintenance Requests</a></li>
+            <li class="li nav-item"><a class="nav-link" onclick="showTable('rentertable', this.id, this.name)" id="nav-renter" name="Renters">View Renters</a></li>
+            <li class="li nav-item"><a class="nav-link" onclick="showTable('propertiestable', this.id, this.name)" id ="nav-prop" name="Properties">View Properties</a></li>
+            <li class="li nav-item"><a class="nav-link" onclick="showTable('amenitiestable', this.id, this.name)" id ="nav-amen" name="Amenities">View Amenities</a></li>
+            <li class="li nav-item"><a class="nav-link" onclick="showTable('maintenancetable', this.id, this.name)" id ="nav-maint" name="Maintenance Requests">View Maintenance Requests</a></li>
         </ul>
     </div>
 </nav>
@@ -179,6 +179,7 @@
           <th>Username</th>
           <th>Email</th>
           <th>Contact</th>
+		  <th>Monthly Rent Dues</th>
         </tr>
       </thead>
       {% for renter in renters %}
@@ -188,6 +189,8 @@
           <td>{{renter.username}}</td>
           <td>{{renter.renter_id}}</td>
           <td>{{renter.contact}}</td>
+          <td>{{renter.rent}}</td>
+
         </tr>
       </tbody>
       {% endfor %}
@@ -203,6 +206,7 @@
           <th>Username</th>
           <th>Description</th>
           <th>IsUrgent?</th>
+          <th>Action</th>
         </tr>
       </thead>
       {% for maint in maintenance %}
@@ -212,25 +216,72 @@
           <td>{{maint.renter_id}}</td>
           <td>{{maint.request_description}}</td>
           <td>{{maint.urgency}}</td>
+          <td>
+              <form action="#" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ maint.property_id }}" name="property_id"/>
+                <input type="hidden" value="{{ maint.renter_id }}" name="renter_id"/>
+                <input type="hidden" value="{{ maint.request_description }}" name="req_desc"/>
+                <input type="hidden" value="{{ maint.urgency }}" name="urgency"/>
+                <input type="submit" class="btn" value="Resolve" name="del_maint">
+              </form>
+          </td>
         </tr>
       </tbody>
       {% endfor %}
     </table>
 </div>
 
+<div id="amenitiestable" class="container" style="display:none">
+    <h2 class="text-center"><u>Amenities</u></h2><br>            
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Amenity</th>
+          <th>Availability</th>
+        </tr>
+      </thead>
+      {% for renter in renters %}
+      <tbody>
+        <tr>
+          <td>PLACEHOLDER WEIGHT ROOM</td>
+          <td>PLACEHOLDER TRUE</td>
+
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+</div>
+
+<div id="propertiestable" class="container" style="display:none">
+    <h2 class="text-center"><u>Properties</u></h2><br>            
+    <table class="table">
+      <thead>
+        <tr>
+			<th>Property</th>
+			<th>Rent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PLACEHOLDER 123</td>
+          <td>PLACEHOLDER 1500</td>
+
+        </tr>
+      </tbody>
+    </table>
+</div>
+
   <script>
-    function showRenters() {
-      if(document.getElementById("rentertable").style.display == 'block'){
-        document.getElementById("rentertable").style.display = 'none'
+	function showTable(table, elmID, elmName) {
+      if(document.getElementById(table).style.display == 'block'){
+        document.getElementById(table).style.display = 'none'
+        document.getElementById(elmID).innerHTML = 'View ' + elmName
+
       } else {
-        document.getElementById("rentertable").style.display = 'block'
-      }
-    }
-    function showMaintR() {
-      if(document.getElementById("maintenancetable").style.display == 'block'){
-        document.getElementById("maintenancetable").style.display = 'none'
-      } else {
-        document.getElementById("maintenancetable").style.display = 'block'
+        document.getElementById(table).style.display = 'block'
+        document.getElementById(elmID).innerHTML = 'Hide ' + elmName
+
       }
     }
   </script>

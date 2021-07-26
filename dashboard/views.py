@@ -177,6 +177,24 @@ def employeepage(request):
         #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
     )
     maintenance = scanMaintenanceRequest.get('Items')
+    scanProperty = propertyTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    properties = scanProperty.get('Items')
+    
+    for r in renters:
+        for p in properties:
+            if r['property_id'] == p['property_id']:
+                r['rent'] = p['rent']
+
+    if('del_maint' in request.POST):
+        print("RESOLVED CLICKED RESOLVE CLICKED")
+        print(request.POST['property_id'])
+        print(request.POST['renter_id'])
+        print(request.POST['req_desc'])
+        print(request.POST['urgency'])
+        # ADD DYNAMODB DELETE WITH PROPERTY_ID and RENTER_ID
+
     return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance})
 
 def pay(request):
