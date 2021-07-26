@@ -173,7 +173,11 @@ def employeepage(request):
         #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
     )
     renters = scanAllRenter.get('Items')
-    return render(request, "employeepage.html", {'user':user, 'renters': renters})
+    scanMaintenanceRequest = maintenanceTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    maintenance = scanMaintenanceRequest.get('Items')
+    return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance})
 
 def pay(request):
     global property

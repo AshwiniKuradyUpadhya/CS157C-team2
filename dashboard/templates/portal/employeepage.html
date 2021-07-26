@@ -160,7 +160,7 @@
             <li class="li nav-item"><a class="nav-link" onclick="showRenters()">View Renters</a></li>
             <li class="li nav-item"><a class="nav-link" href="">View Properties</a></li>
             <li class="li nav-item"><a class="nav-link" href="">View Amenities</a></li>
-            <li class="li nav-item"><a class="nav-link" href="">View Maintenance Requests</a></li>
+            <li class="li nav-item"><a class="nav-link" onclick="showMaintR()">View Maintenance Requests</a></li>
         </ul>
     </div>
 </nav>
@@ -192,7 +192,31 @@
       </tbody>
       {% endfor %}
     </table>
-  </div>
+</div>
+
+<div id="maintenancetable" class="container" style="display:none">
+    <h2 class="text-center"><u>Maintenance Requests</u></h2><br>            
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Username</th>
+          <th>Description</th>
+          <th>IsUrgent?</th>
+        </tr>
+      </thead>
+      {% for maint in maintenance %}
+      <tbody>
+        <tr>
+          <td>{{maint.property_id}}</td>
+          <td>{{maint.renter_id}}</td>
+          <td>{{maint.request_description}}</td>
+          <td>{{maint.urgency}}</td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+</div>
 
   <script>
     function showRenters() {
@@ -200,6 +224,13 @@
         document.getElementById("rentertable").style.display = 'none'
       } else {
         document.getElementById("rentertable").style.display = 'block'
+      }
+    }
+    function showMaintR() {
+      if(document.getElementById("maintenancetable").style.display == 'block'){
+        document.getElementById("maintenancetable").style.display = 'none'
+      } else {
+        document.getElementById("maintenancetable").style.display = 'block'
       }
     }
   </script>
