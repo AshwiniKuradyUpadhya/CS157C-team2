@@ -193,7 +193,14 @@ def employeepage(request):
         print(request.POST['renter_id'])
         print(request.POST['req_desc'])
         print(request.POST['urgency'])
-        # ADD DYNAMODB DELETE WITH PROPERTY_ID and RENTER_ID
+        # deleteResponse = maintenanceTable.delete_item(
+        #     Key={
+        #         'renter_id': request.POST['renter_id'],
+        #         'property_id': request.POST['property_id']
+        #     },
+        #     ConditionExpression="request_description = " + request.POST['req_desc']
+        # )
+        # 
 
     return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance})
 
