@@ -271,7 +271,7 @@
 
 	<div id="submitForm" class="modal">
 
-		<form class="modal-content animate" method="post" action="{% url 'applyForApartment'%}">{% csrf_token %}
+		<form class="modal-content animate" method="post" action="{% url 'applyForApartment'%}" id="applySubmission">{% csrf_token %}
 <!--			<div class="imgcontainer">-->
 <!--				<span onclick="document.getElementById('submitForm').style.display='none'">&times;</span>-->
 <!--			</div>-->
@@ -318,6 +318,25 @@
 				submitForm.display = "none";
     			}
 		}
+
+		$("#applySubmission").submit(function(event) {
+        // Stop form from submitting normally
+        event.preventDefault();
+        var applyForm = $(this);
+        // Send the data using post
+        var posting = $.post( applyForm.attr('action'), applyForm.serialize() );
+        // if success:
+        posting.done(function(data) {
+            // success actions, maybe change submit button to 'friend added' or whatever
+			console.log('success')
+			document.getElementById('submitForm').style.display='none'
+        });
+        // if failure:
+        posting.fail(function(data) {
+			console.log('fail')
+            // 4xx or 5xx response, alert user about failure
+        });
+    });
 	</script>
 
 </body>

@@ -288,5 +288,5 @@ def applyForApartment(request):
         #     }
         # item = response['Item']
         print(name)
-    # return render(request, 'portal/floorplans.html')
-    return {"message": "submitted succesfully"}
+    return render(request, 'portal/floorplans.html')
+    # return {"message": "submitted succesfully"}
