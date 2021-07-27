@@ -145,7 +145,7 @@
 			</div>
 		</nav>
 
-			<div class="container">
+			<div id = "roomContainer" class="container">
 			<div class="row content">	
 				<div class="col-md-4">
 					<div class="text-center">
@@ -169,32 +169,63 @@
 					</div>
 			</div>
 			</div>
+	<div id="formSubmittedPage" class="container">
+		<div class="col-md-12">
+			<div class="text-center">
+				<h3>Thank you for contacting us!</h3>
+				<br>
+				<h3>Your request has been successfully submitted.</h3>
+				<br>
+				<br>
+				<h4>Please click on the Floorplans to view all the available options</h4>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		var x = document.getElementById("formSubmittedPage");
+		x.style.display = "none";
+	</script>
+
+	<script>
+
+		// When the user clicks anywhere outside of the modal, close it
+
+		function postSubmitAction(){
+		document.getElementById('roomContainer').style.display='none'
+		document.getElementById('popup1bed').style.display = 'none'
+		document.getElementById('popup2bed').style.display = 'none'
+		document.getElementById('popupstud').style.display = 'none'
+		document.getElementById('submitForm').style.display='block'
+		document.getElementById('formSubmittedPage').style.display='block'
+		}
+	</script>
+
 	<div id="popup1bed" class="modal">
-  
-  		<form class="modal-content animate" action="/action_page.php" method="post">
-    		<div class="imgcontainer">
-      			<span onclick="document.getElementById('popup1bed').style.display='none'" class="close" title="Close Modal">&times;</span>
-    		</div>
+		<div class="modal-content animate">{% csrf_token %}
+			<div class="imgcontainer">
+				<span onclick="document.getElementById('popup1bed').style.display='none'" class="close" title="Close Modal">&times;</span>
+			</div>
 
-    		<div class="container2">
-      			<label for="uname"><b>Floorplan for 1bedroom</b></label>
-      			<img height=400px width = 400px class = "center" src="{% static 'images/1bed.png' %}" name="uname">
+			<div class="container2">
+				<label for="uname"><b>Floorplan for 1bedroom</b></label>
+				<img height=400px width = 400px class = "center" src="{% static 'images/1bed.png' %}" name="uname">
 
-      			<label for="psw"><b>Units available : 10302, 13101, 12203</b></label>
-        
-      			<button type="submit">Apply for this Unit</button>
-    		</div>
+				<label for="psw"><b>Units available : 10302, 13101, 12203</b></label>
 
-    		<div class="container2" style="background-color:#f1f1f1">
-      			<button type="button" onclick="document.getElementById('popup1bed').style.display='none'" class="cancelbutton">Cancel</button>
-    		</div>
+				<button onclick="postSubmitAction()">Request for this Unit</button>
+			</div>
 
-  		</form>
+			<div class="container2" style="background-color:#f1f1f1">
+				<button type="button" onclick="document.getElementById('popup1bed').style.display='none'" class="cancelbutton">Cancel</button>
+			</div>
+
+		</div>
 	</div>
 
 	<div id="popup2bed" class="modal">
-  
-  		<form class="modal-content animate" action="/action_page.php" method="post">
+
+		<div class="modal-content animate">{% csrf_token %}
     		<div class="imgcontainer">
 			<span onclick="document.getElementById('popup2bed').style.display='none'" class="close" title="Close Modal">&times;</span>
     		</div>
@@ -204,20 +235,20 @@
       			<img height=400px width = 400px class = "center" src="{% static 'images/2bed.png' %}" name="uname">
 
       			<label for="psw"><b>Units available : 10402, 13401, 12403</b></label>
-        
-      			<button type="submit">Apply for this Unit</button>
+
+				<button onclick="postSubmitAction()">Request for this Unit</button>
     		</div>
 
     		<div class="container2" style="background-color:#f1f1f1">
       			<button type="button" onclick="document.getElementById('popup2bed').style.display='none'" class="cancelbutton">Cancel</button>
     		</div>
 
-  		</form>
+  		</div>
 	</div>
 
 	<div id="popupstud" class="modal">
-  
-  		<form class="modal-content animate" action="/action_page.php" method="post">
+
+		<div class="modal-content animate">{% csrf_token %}
     		<div class="imgcontainer">
 			<span onclick="document.getElementById('popupstud').style.display='none'" class="close" title="Close Modal">&times;</span>
     		</div>
@@ -227,15 +258,48 @@
       			<img height=400px width = 400px class = "center" src="{% static 'images/studio.png' %}" name="uname">
 
       			<label for="psw"><b>Units available : 10101, 13101</b></label>
-        
-      			<button type="submit">Apply for this Unit</button>
+
+				<button onclick="postSubmitAction()">Request for this Unit</button>
     		</div>
 
     		<div class="container2" style="background-color:#f1f1f1">
       			<button type="button" onclick="document.getElementById('popupstud').style.display='none'" class="cancelbutton">Cancel</button>
     		</div>
 
-  		</form>
+  		</div>
+	</div>
+
+	<div id="submitForm" class="modal">
+
+		<form class="modal-content animate" method="post" action="{% url 'applyForApartment'%}">{% csrf_token %}
+<!--			<div class="imgcontainer">-->
+<!--				<span onclick="document.getElementById('submitForm').style.display='none'">&times;</span>-->
+<!--			</div>-->
+
+			<div class="container2">
+				<h1>We would like to contact you with our best offer</h1>
+				<br>
+				<br>
+				<label for="name"><b>Please enter your name</b></label>
+				<input type="text" id="name" placeholder="Enter name" name="name" required>
+				<br>
+				<br>
+				<label for="email"><b>Please enter your email id</b></label>
+				<input type="text" id="email" placeholder="Enter Email" name="email" required>
+				<br>
+				<br>
+				<label for="phone"><b>Please enter your contact number</b></label>
+				<input type="tel" id="phone" name="phone" required>
+				<br>
+				<br>
+				<button type="submit">Submit</button>
+			</div>
+
+			<div class="container2" style="background-color:#f1f1f1">
+				<button type="button" onclick="document.getElementById('submitForm').style.display='none'" class="cancelbutton">Cancel</button>
+			</div>
+
+		</form>
 	</div>
 
 	<script>
@@ -243,6 +307,7 @@
 		var onebed = document.getElementById('popup1bed');
 		var twobed = document.getElementById('popup2bed');
 		var stud = document.getElementById('popupstud');
+		var submitForm = document.getElementById('submitForm');
 
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
@@ -250,6 +315,7 @@
         				onebed.style.display = "none";
 				twobed.style.display = "none" ;
 				stud.style.display = "none";
+				submitForm.display = "none";
     			}
 		}
 	</script>

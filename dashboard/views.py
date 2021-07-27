@@ -156,6 +156,7 @@ def employeelogin(request):
         else:
             user = items[0]
             print(user)
+            print(email)
             return redirect('employeepage')
             #return render(request, 'portal/employeepage.html', {'user':user})
 
@@ -264,3 +265,28 @@ def amenities(request):
     
 def index(request):
     return render(request, "index.html")
+
+def applyForApartment(request):
+    print("Breakpoint")
+
+    if request.method == "POST":
+        print("789")
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        # table = dynamodb.Table('floorplans')
+        # table.put_item(
+        #     Item={
+        #         'name': name,
+        #         'email_id': email,
+        #         'contact_num': phone,
+        #     }
+        # )
+        # response = table.get_item(
+        #     Key={
+        #         'property_id': email,
+        #     }
+        # item = response['Item']
+        print(name)
+    # return render(request, 'portal/floorplans.html')
+    return {"message": "submitted succesfully"}

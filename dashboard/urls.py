@@ -20,5 +20,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('userpage/', views.userpage, name='userpage'),
     path('employeepage', views.employeepage, name='employeepage'),
+    path('applyForApartment', views.applyForApartment, name = 'applyForApartment'),
 
 ]
