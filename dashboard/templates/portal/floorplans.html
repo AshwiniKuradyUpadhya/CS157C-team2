@@ -77,7 +77,7 @@
 		/* Center the image and position the close button */
 		.imgcontainer {
   			text-align: center;
-  			margin: 24px 0 12px 0;
+  			margin: 30px 0 15px 0;
   			position: relative;
 		}
 
@@ -208,11 +208,8 @@
 			</div>
 
 			<div class="container2">
-				<label for="uname"><b>Floorplan for 1bedroom</b></label>
+				<label for="uname"><b>Floorplan for 1 Bedroom apartment</b></label>
 				<img height=400px width = 400px class = "center" src="{% static 'images/1bed.png' %}" name="uname">
-
-				<label for="psw"><b>Units available : 10302, 13101, 12203</b></label>
-
 				<button onclick="postSubmitAction()">Request for this Unit</button>
 			</div>
 
@@ -231,11 +228,8 @@
     		</div>
 
     		<div class="container2">
-      			<label for="uname"><b>Floorplan for 2bedroom</b></label>
+      			<label for="uname"><b>Floorplan for 2 Bedroom apartment</b></label>
       			<img height=400px width = 400px class = "center" src="{% static 'images/2bed.png' %}" name="uname">
-
-      			<label for="psw"><b>Units available : 10402, 13401, 12403</b></label>
-
 				<button onclick="postSubmitAction()">Request for this Unit</button>
     		</div>
 
@@ -254,11 +248,8 @@
     		</div>
 
     		<div class="container2">
-      			<label for="uname"><b>Floorplan for Studio</b></label>
+      			<label for="uname"><b>Floorplan for Studio apartment</b></label>
       			<img height=400px width = 400px class = "center" src="{% static 'images/studio.png' %}" name="uname">
-
-      			<label for="psw"><b>Units available : 10101, 13101</b></label>
-
 				<button onclick="postSubmitAction()">Request for this Unit</button>
     		</div>
 
@@ -272,10 +263,6 @@
 	<div id="submitForm" class="modal">
 
 		<form class="modal-content animate" method="post" action="{% url 'applyForApartment'%}" id="applySubmission">{% csrf_token %}
-<!--			<div class="imgcontainer">-->
-<!--				<span onclick="document.getElementById('submitForm').style.display='none'">&times;</span>-->
-<!--			</div>-->
-
 			<div class="container2">
 				<h1>We would like to contact you with our best offer</h1>
 				<br>
@@ -312,7 +299,7 @@
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
     			if (event.target == onebed||event.target == twobed || event.target ==stud) {
-        				onebed.style.display = "none";
+        		onebed.style.display = "none";
 				twobed.style.display = "none" ;
 				stud.style.display = "none";
 				submitForm.display = "none";
@@ -327,14 +314,11 @@
         var posting = $.post( applyForm.attr('action'), applyForm.serialize() );
         // if success:
         posting.done(function(data) {
-            // success actions, maybe change submit button to 'friend added' or whatever
-			console.log('success')
 			document.getElementById('submitForm').style.display='none'
         });
         // if failure:
         posting.fail(function(data) {
 			console.log('fail')
-            // 4xx or 5xx response, alert user about failure
         });
     });
 	</script>
