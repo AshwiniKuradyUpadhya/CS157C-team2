@@ -2,6 +2,7 @@
   Developing FAQs section for Rental Portal Application 
 -->
 <!DOCTYPE html>
+{% load static %}
 <html>
 
 <head>
@@ -106,10 +107,10 @@
 
 <body>
 <!-- company logo -->
-        <div class="text-center">
-            <a href='/index.html'>
-            <img height=150px src= 'images/logo.jpeg'></i></a>
-        </div>
+<div class="text-center">
+    <a href='index'>
+        <img height=150px src= "{% static 'images/logo.jpeg' %}"></a>
+</div>
 
 <!-- navigation bar
 navbar REFERENCE : https://github.com/sniklaus/teaching-webdev/blob/master/bootstrap/1-navbar.html-->
