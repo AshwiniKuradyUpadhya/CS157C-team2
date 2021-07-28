@@ -21,5 +21,5 @@ urlpatterns = [
     path('userpage/', views.userpage, name='userpage'),
     path('employeepage', views.employeepage, name='employeepage'),
     path('applyForApartment', views.applyForApartment, name = 'applyForApartment'),
-
+    path('saveRow', views.saveRow, name = 'saveRow'),
 ]

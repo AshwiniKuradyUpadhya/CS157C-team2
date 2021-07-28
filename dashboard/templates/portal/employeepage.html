@@ -138,8 +138,6 @@
   			color: red;
   			cursor: pointer;
 		}
-
-		}
 	</style>
 </head>
 
@@ -180,17 +178,20 @@
           <th>Email</th>
           <th>Contact</th>
 		  <th>Monthly Rent Dues</th>
+		  <th>Action</th>
         </tr>
       </thead>
       {% for renter in renters %}
       <tbody>
         <tr>
-          <td>{{renter.property_id}}</td>
-          <td>{{renter.username}}</td>
-          <td>{{renter.renter_id}}</td>
-          <td>{{renter.contact}}</td>
-          <td>{{renter.rent}}</td>
-
+          <td name="property_id">{{renter.property_id}}</td>
+          <td name="username">{{renter.username}}</td>
+          <td name="renter_id">{{renter.renter_id}}</td>
+          <td name="contact">{{renter.contact}}</td>
+          <td name="rent">{{renter.rent}}</td>
+		  <td name="actionElements">
+			<button onclick="editRow(this)" class="btn btn-light btn-md" id="editRenterBtn">Edit</button>
+		  </td>
         </tr>
       </tbody>
       {% endfor %}
@@ -225,6 +226,7 @@
                 <input type="hidden" value="{{ maint.urgency }}" name="urgency"/>
                 <input type="submit" class="btn" value="Resolve" name="del_maint">
               </form>
+
           </td>
         </tr>
       </tbody>
@@ -239,6 +241,7 @@
         <tr>
           <th>Amenity</th>
           <th>Availability</th>
+		  <th>Action</th>
         </tr>
       </thead>
       {% for renter in renters %}
@@ -260,6 +263,7 @@
         <tr>
 			<th>Property</th>
 			<th>Rent</th>
+			<th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -272,6 +276,30 @@
     </table>
 </div>
 
+<div id="edits" class="modal">
+	<div class="modal-content animate">
+
+		<div class="imgcontainer">
+			<span onclick="document.getElementById('edits').style.display='none'" class="close" title="Close Modal">&times;</span>
+		</div>
+
+		<div class="container2">
+			<form method = "post" action = "#">{% csrf_token %}
+
+				<label for="resemail"><b>Email ID</b></label>
+				<input type="text" id="resemail" placeholder="Enter your registered Email ID" name="resemail" required>
+
+				<label for="psw"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="psw" required>
+
+				<button type="submit">Login</button>
+
+				<button type="button" onclick="document.getElementById('edits').style.display='none'" class="cancelbutton">Cancel</button>
+			</form>
+		</div>
+
+	</div>
+</div>
   <script>
 	function showTable(table, elmID, elmName) {
       if(document.getElementById(table).style.display == 'block'){
@@ -284,6 +312,76 @@
 
       }
     }
+
+	var editsModal = document.getElementById('edits');
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+			if (event.target == editsModal)
+			{
+					editsModal.style.display = "none";
+			}
+	}
+
+	function editRow(that) {
+		console.log(that)
+		var row = that.closest('tr')
+		$(row).find('td').each(function(elm){
+			if($(this).attr('name') == 'actionElements'){
+				$(this).replaceWith(`
+					<td name="actionElements">
+						<input type="submit" action="{% url 'saveRow' %}" onclick="saveRow(this)" class="btn btn-light btn-md" value="Save" name="save_renter" id="saveRenterBtn">
+					</td>`)
+			} else {
+				$(this).replaceWith('<td name="'+$(this).attr('name')+'"><input type="text" placeholder="'+$(this).text()+'"></td>')
+			}
+		})
+	}
+
+	function saveRow(that) {
+		console.log(that)
+		var row = that.closest('tr')
+		var tabledb = that.closest('div').getAttribute('id')
+		var data = {
+			csrfmiddlewaretoken: '{{ csrf_token }}',
+		}
+		data['table'] = tabledb
+		$(row).find('td').each(function(elm) {
+			if($(this).attr('name') == 'actionElements') {
+				$(this).replaceWith(`
+					<td name="actionElements">
+						<button onclick="editRow(this)" class="btn btn-light btn-md" id="editRenterBtn">Edit</button>
+					</td>`)
+			} else {
+				if ($(this).find('input')[0].value) {
+					console.log($(this).find('input')[0].value)
+					data[$(this).attr('name')] = $(this).find('input')[0].value
+					$(this).replaceWith('<td name="'+ $(this).find('input')[0].value+'">'+ $(this).find('input')[0].value+'</td>')
+				} else {
+					console.log($(this).find('input').attr('placeholder'))
+					data[$(this).attr('name')] = $(this).find('input').attr('placeholder')
+					$(this).replaceWith('<td name="'+$(this).find('input').attr('placeholder')+'">'+$(this).find('input').attr('placeholder')+'</td>')
+				}
+			}
+		})
+		console.log(data)
+		var posting = $.post( that.getAttribute('action'), data)
+	}
+
+	// $("#saveRenterBtn").submit(function(event) {
+    //     // Stop form from submitting normally
+    //     event.preventDefault();
+    //     var applyForm = $(this);
+    //     // Send the data using post
+    //     var posting = $.post( applyForm.attr('action'), applyForm.serialize() )
+    //     // if success:
+    //     posting.done(function(data) {
+	// 		console.log('success')
+    //     })
+    //     // if failure:
+    //     posting.fail(function(data) {
+	// 		console.log('fail')
+    //     })
+	// })
   </script>
 </body>
 </html>

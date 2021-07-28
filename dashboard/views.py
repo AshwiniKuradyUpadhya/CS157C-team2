@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+import json
 
 # Create your views here.
 import boto3
@@ -7,6 +8,10 @@ from boto3.dynamodb.conditions import Attr
 
 user={}
 dynamodb = boto3.resource('dynamodb')
+renterTable = dynamodb.Table('Renter')
+maintenanceTable = dynamodb.Table('Maintenance')
+amenitiesTable = dynamodb.Table('Amenities')
+propertyTable = dynamodb.Table('Property')
 
 
 def dashboard(request):
@@ -186,6 +191,8 @@ def employeepage(request):
     for r in renters:
         for p in properties:
             if r['property_id'] == p['property_id']:
+                print(r['property_id'])
+                print(p['property_id'])
                 r['rent'] = p['rent']
 
     if('del_maint' in request.POST):
@@ -204,6 +211,68 @@ def employeepage(request):
         # 
 
     return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance})
+
+def saveRow(request):
+    global user
+    global dynamodb
+    global renterTable
+    global maintenanceTable
+    global amenitiesTable
+    global propertyTable
+
+    useTable = ''
+
+    data = json.loads(json.dumps(request.POST))
+    del data['csrfmiddlewaretoken']
+    if data['table'] == 'rentertable':
+        propid=data['property_id']
+        renterid=data['renter_id']
+        username=data['username']
+        contact=data['contact']
+        rent=data['rent']
+
+        # extract keys not in table
+        del data['table']
+        # update rent first then delete from table
+        propertyTable.update_item(
+            Key={
+                'property_id': int(propid)
+            },
+            UpdateExpression= "set rent=:rent",
+            ExpressionAttributeValues={
+                ':rent': rent
+            }
+        )
+        del data['rent']
+        # update renters table
+        tableKey = data['renter_id']
+        del data['renter_id']
+        # create update expr
+        updExpr = 'set '
+        exprAttrVal = {}
+        for key in data:
+            updExpr += key + "=:" + key + ", "
+            exprAttrVal[":" + key ] = data[key]
+        updExpr = updExpr[:-2]
+        # keep property_id int
+        exprAttrVal[':property_id'] = int(exprAttrVal[':property_id'])
+        renterTable.update_item(
+            Key={
+                'renter_id': tableKey
+            },
+            UpdateExpression = updExpr,
+            ExpressionAttributeValues=exprAttrVal
+        )
+    elif data['table'] == 'maintenancetable':
+        useTable = maintenanceTable
+    elif data['table'] == 'amenitiestable':
+        useTable = amenitiesTable
+    elif data['table'] == 'propertiestable':
+        useTable = propertyTable
+
+
+    return render(request, "employeepage.html", {'user':user})
+
 
 def pay(request):
     global property
