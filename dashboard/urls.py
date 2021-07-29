@@ -24,4 +24,6 @@ urlpatterns = [
     path('saveRow', views.saveRow, name = 'saveRow'),
     path('amenities_redirect', views.amenities_redirect, name='amenities_redirect'),
     path('amenities_slot', views.amenities_slot, name='amenities_slot'),
+    path('Documents', views.Documents, name = 'Documents'),
+    path('documentsUpload', views.documentsUpload, name = 'documentsUpload'),
 ]

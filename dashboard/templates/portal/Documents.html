@@ -1,3 +1,15 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>$Title$</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--$END$-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
 <html lang="en">
 {%load static %}
 <head>
@@ -99,10 +111,6 @@
   			background-color: #f44336;
 		}
 
-		.container2 {
-  			padding: 16px;
-		}
-
 		.modal {
   			display: none;
   			position: fixed;
@@ -141,6 +149,46 @@
 
 		}
 	</style>
+
+    <script type='text/javascript'>
+        function preview_image(event)
+        {
+         var reader = new FileReader();
+         reader.onload = function()
+         {
+          var output = document.getElementById('output_image');
+          output.src = reader.result;
+         }
+         reader.readAsDataURL(event.target.files[0]);
+        }
+
+        /* Displays file name */
+        function showFileName() {
+            var fil = document.getElementById("dlFile");
+            alert(fil.value);
+        }
+
+        /* Display 'submitted' message
+        function clickAlert() {
+            alert("Details submitted successfully!!");
+        }
+
+    </script>
+
+    <style>
+#wrapper
+{
+ text-align:center;
+ margin:200 auto;
+ padding:0px;
+ width:1000px;
+}
+#output_image
+{
+ max-width:300px;
+}
+</style>
+
 </head>
 
 
@@ -165,96 +213,35 @@
     </div>
 </nav>
 
-<style>
-#Sidenav a {
-  position: absolute;
-  right: -60px;
-  transition: 0.3s;
-  padding: 10px;
-  width: 200px;
-  text-decoration: none;
-  font-size: 20px;
-  color: white;
-  border-radius: 0 5px 5px 0;
-}
+<ul class="navbar-nav navbar-right">
+    <button class="btn btn-light btn-md"><h3> Logged in as: </h3><p> {{ user.username }}</p></button>
+</ul>
 
-#Sidenav a:hover {
-  right: -10;
-}
 
-#Login {
-  top: 100px;
-  background-color: #04AA6D;
-}
-
-#Logout {
-  top: 150px;
-  background-color: #2196F3;
-}
-#Logout2{
-  top: 200px;
-  background-color: #2196F3;
-}
-
-</style>
-
-<div id="Sidenav" class="Sidenav">
-    <a href="#" id="Login">Login:{{ user.username }}</a>
-    <a href="/" id="Logout">Logout</a>
+<div class="container">
+    <form method = "post" action = "{% url 'documentsUpload' %}">{% csrf_token %}
+        <h4>Upload data and documents for verification</h4>
+        <label for="current_Address"><b>Enter your current address</b></label>
+        <input type="text" id="current_Address" placeholder="Enter your current address" name="current_Address" required>
+        <br>
+        <br>
+        <label for="ssn"><b>Enter your last 4 digits of SSN number</b></label>
+        <input type="text" id="ssn" placeholder="SSN number" name="ssn" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+        <br>
+        <br>
+        <label for="dlFile"><b>Upload your Driver's license</b></label>
+        <div id="wrapper">
+            <input type="file" accept="image/*" onchange="preview_image(event)" id="dlFile" name="dlFile" required>
+            <img id="output_image"/>
+            <a href="#" onclick="showFileName()">Show file name</a>
+        </div>
+        <br>
+        <br>
+        <input type="checkbox" id="consent" name="consent">
+        <label for="consent"> I give my consent to use this document and details for Sunshine Apartments for verification</label>
+        <br>
+        <input type="submit" value="Submit" onclick="showAlert()">
+    </form>
 </div>
-<h2 class="text-center"><u>Your Reservations</u></h2><br>
-<table class="table">
-    <thead>
-    <tr>
-        <th>EmailID</th>
-        <th>Apartment</th>
-        <th>Reserved Area</th>
-        <th>Reserved Date</th>
-    </tr>
-    </thead>
-    {% for reservation in amenities %}
-    {% if reservation.renter_id == user.renter_id %}
-    <tbody>
-    <tr>
-        <td>{{reservation.renter_id}}</td>
-        <td>{{reservation.property_id}}</td>
-        <td>{{reservation.Reserved_area}}</td>
-        <td>{{reservation.Reserved_slot}}</td>
-    </tr>
-    <td>
-        <form action="#" method="post">
-            {% csrf_token %}
-            <input type="hidden" value="{{ reservation.renter_id }}" name="renter_id"/>
-            <input type="hidden" value="{{ reservation.Reserved_area }}" name="Reserved_area"/>
-            <!--                <input type="submit" class="btn" value="Resolve" name="del_amen">-->
-        </form>
-
-    </td>
-    </tbody>
-    {% endif %}
-    {% endfor %}
-</table>
-
-<h2 class="text-center"><u>Your Maintenance Requests</u></h2><br>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Apartment</th>
-        <th>Request Description</th>
-        <th>Status</th>
-    </tr>
-    </thead>
-    {% for renter in renters %}
-    {% if renter.renter_id == user.renter_id %}
-    <tbody>
-    <tr>
-        <td>{{renter.property_id}}</td>
-        <td>{{renter.request_description}}</td>
-    </tr>
-    </tbody>
-    {% endif %}
-    {% endfor %}
-</table>
 </body>
 </html>
-
