@@ -12,6 +12,7 @@ renterTable = dynamodb.Table('Renter')
 maintenanceTable = dynamodb.Table('Maintenance')
 amenitiesTable = dynamodb.Table('Amenities')
 propertyTable = dynamodb.Table('Property')
+floorplansTable = dynamodb.Table('floorplans')
 
 
 def dashboard(request):
@@ -204,30 +205,64 @@ def employeepage(request):
         #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
     )
     properties = scanProperty.get('Items')
-    
+    scanAmenities = amenitiesTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    amenities = scanAmenities.get('Items')
+    scanFloorplans = floorplansTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    floorplans = scanFloorplans.get('Items')
     for r in renters:
         for p in properties:
             if r['property_id'] == p['property_id']:
-                print(r['property_id'])
-                print(p['property_id'])
                 r['rent'] = p['rent']
 
     if('del_maint' in request.POST):
-        print("RESOLVED CLICKED RESOLVE CLICKED")
-        print(request.POST['property_id'])
-        print(request.POST['renter_id'])
-        print(request.POST['req_desc'])
-        print(request.POST['urgency'])
-        # deleteResponse = maintenanceTable.delete_item(
-        #     Key={
-        #         'renter_id': request.POST['renter_id'],
-        #         'property_id': request.POST['property_id']
-        #     },
-        #     ConditionExpression="request_description = " + request.POST['req_desc']
-        # )
-        # 
+        print("Maintenance issue resolved.")
+        deleteResponse = maintenanceTable.delete_item(
+            Key={
+                'renter_id': request.POST['renter_id'],
+                'property_id': int(request.POST['property_id'])
+            },
+            ConditionExpression="request_description=:req",
+            ExpressionAttributeValues={
+                ':req': request.POST['req_desc']
+            }
+        )
+        scanMaintenanceRequest = maintenanceTable.scan(
+            #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+        )
+        maintenance = scanMaintenanceRequest.get('Items')
+    elif('del_reserve' in request.POST):
+        print("Deleting Reservation...")
+        deleteResponse = amenitiesTable.delete_item(
+            Key={
+                'renter_id': request.POST['rid'],
+                'Reserved_area': request.POST['res_area']
+            },
+            ConditionExpression="Reserved_slot=:slot",
+            ExpressionAttributeValues={
+               ':slot': request.POST['res_slot']
+            }
+        )
+        scanAmenities = amenitiesTable.scan(
+            #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+        )
+        amenities = scanAmenities.get('Items')
+    elif('del_floorplan' in request.POST):
+        print("Deleting Reservation...")
+        deleteResponse = floorplansTable.delete_item(
+            Key={
+                'email_id': request.POST['eid'],
+            },
+        )
+        scanFloorplans = floorplansTable.scan(
+            #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+        )
+        floorplans = scanFloorplans.get('Items')
 
-    return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance})
+    return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance, 'amenities': amenities, 'floorplans': floorplans, 'properties':properties})
 
 def saveRow(request):
     global user

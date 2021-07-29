@@ -159,6 +159,7 @@
             <li class="li nav-item"><a class="nav-link" onclick="showTable('propertiestable', this.id, this.name)" id ="nav-prop" name="Properties">View Properties</a></li>
             <li class="li nav-item"><a class="nav-link" onclick="showTable('amenitiestable', this.id, this.name)" id ="nav-amen" name="Amenities">View Amenities</a></li>
             <li class="li nav-item"><a class="nav-link" onclick="showTable('maintenancetable', this.id, this.name)" id ="nav-maint" name="Maintenance Requests">View Maintenance Requests</a></li>
+            <li class="li nav-item"><a class="nav-link" onclick="showTable('floorplanstable', this.id, this.name)" id ="nav-flpl" name="Interested Renters">View Interested Renters</a></li>
         </ul>
     </div>
 </nav>
@@ -213,10 +214,10 @@
       {% for maint in maintenance %}
       <tbody>
         <tr>
-          <td>{{maint.property_id}}</td>
-          <td>{{maint.renter_id}}</td>
-          <td>{{maint.request_description}}</td>
-          <td>{{maint.urgency}}</td>
+          <td name="property_id">{{maint.property_id}}</td>
+          <td name="renter_id">{{maint.renter_id}}</td>
+          <td name="request_description">{{maint.request_description}}</td>
+          <td name="urgency">{{maint.urgency}}</td>
           <td>
               <form action="#" method="post">
                 {% csrf_token %}
@@ -240,15 +241,29 @@
       <thead>
         <tr>
           <th>Amenity</th>
-          <th>Availability</th>
+		  <th>Slot Reserved</th>
+          <th>Renter</th>
+		  <th>Property</th>
 		  <th>Action</th>
         </tr>
       </thead>
-      {% for renter in renters %}
+      {% for amenity in amenities %}
       <tbody>
         <tr>
-          <td>PLACEHOLDER WEIGHT ROOM</td>
-          <td>PLACEHOLDER TRUE</td>
+          <td name="Reserved_area">{{ amenity.Reserved_area }}</td>
+		  <td name="Reserved_slot">{{ amenity.Reserved_slot }}</td>
+          <td name="renter_id">{{ amenity.renter_id }}</td>
+		  <td name="property_id">{{ amenity.property_id }}</td>
+          <td name="actionElements">
+			<form action="#" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ amenity.Reserved_area }}" name="res_area"/>
+                <input type="hidden" value="{{ amenity.Reserved_slot }}" name="res_slot"/>
+                <input type="hidden" value="{{ amenity.renter_id }}" name="rid"/>
+                <input type="hidden" value="{{ amenity.property_id }}" name="pid"/>
+                <input type="submit" class="btn" value="Remove" name="del_reserve">
+              </form>
+		  </td>
 
         </tr>
       </tbody>
@@ -263,42 +278,62 @@
         <tr>
 			<th>Property</th>
 			<th>Rent</th>
+			<th>Current Tenant</th>
 			<th>Action</th>
         </tr>
       </thead>
+      {% for property in properties %}
       <tbody>
         <tr>
-          <td>PLACEHOLDER 123</td>
-          <td>PLACEHOLDER 1500</td>
+          <td name="property_id">{{ property.property_id }}</td>
+		  <td name="rent">{{ property.rent }}</td>
+          <td name="renter_id">{{ property.renter_id }}</td>
+          <td name="actionElements">
+			<form action="#" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ property.property_id }}" name="pid"/>
+                <input type="hidden" value="{{ property.rent }}" name="rent"/>
+                <input type="hidden" value="{{ property.renter_id }}" name="rid"/>
+                <input type="submit" class="btn" value="Remove" name="del_property">
+              </form>
+		  </td>
 
         </tr>
       </tbody>
+      {% endfor %}
     </table>
 </div>
 
-<div id="edits" class="modal">
-	<div class="modal-content animate">
+<div id="floorplanstable" class="container" style="display:none">
+    <h2 class="text-center"><u>Contact Interested Renters</u></h2><br>            
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Contact</th>
+		  <th>Email</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      {% for floorplan in floorplans %}
+      <tbody>
+        <tr>
+          <td name="contact_num">{{ floorplan.contact_num }}</td>
+		  <td name="email_id">{{ floorplan.email_id }}</td>
+          <td name="name">{{ floorplan.name }}</td>
+          <td name="actionElements">
+			<form action="#" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ floorplan.contact_num }}" name="contact"/>
+                <input type="hidden" value="{{ floorplan.email_id }}" name="eid"/>
+                <input type="hidden" value="{{ floorplan.name }}" name="nm"/>
+                <input type="submit" class="btn" value="Remove/Contacted" name="del_floorplan">
+              </form>
+		  </td>
 
-		<div class="imgcontainer">
-			<span onclick="document.getElementById('edits').style.display='none'" class="close" title="Close Modal">&times;</span>
-		</div>
-
-		<div class="container2">
-			<form method = "post" action = "#">{% csrf_token %}
-
-				<label for="resemail"><b>Email ID</b></label>
-				<input type="text" id="resemail" placeholder="Enter your registered Email ID" name="resemail" required>
-
-				<label for="psw"><b>Password</b></label>
-				<input type="password" placeholder="Enter Password" name="psw" required>
-
-				<button type="submit">Login</button>
-
-				<button type="button" onclick="document.getElementById('edits').style.display='none'" class="cancelbutton">Cancel</button>
-			</form>
-		</div>
-
-	</div>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
 </div>
   <script>
 	function showTable(table, elmID, elmName) {
