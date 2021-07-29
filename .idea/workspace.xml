@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:upstream" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cc434760-7277-47a4-877e-d31aab1db56c" name="Default Changelist" comment="added amenities_redirect &amp; amenities_slot">
+      <change beforePath="$PROJECT_DIR$/dashboard/templates/portal/amenities_reservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/templates/portal/amenities_reservations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/templates/portal/maintenance.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/templates/portal/maintenance.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/templates/portal/pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/templates/portal/pay.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1vjdqHA8OcQS7rQUFfeeosTpTcn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.." />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cc434760-7277-47a4-877e-d31aab1db56c" name="Default Changelist" comment="" />
+      <created>1627079620940</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1627079620940</updated>
+    </task>
+    <task id="LOCAL-00001" summary="added employee register and login">
+      <created>1627081884824</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1627081884825</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added urls for register and login for employees and resident">
+      <created>1627082708446</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1627082708446</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added reslogin, resident_register, employeelogin and employee_register functions">
+      <created>1627082879192</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1627082879192</updated>
+    </task>
+    <task id="LOCAL-00004" summary="minor changes">
+      <created>1627083368981</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1627083368981</updated>
+    </task>
+    <task id="LOCAL-00005" summary="login redirect done">
+      <created>1627152102431</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1627152102431</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added static load for image display">
+      <created>1627187050331</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1627187050331</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added static load for image display">
+      <created>1627187299462</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1627187299462</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added static load for image display">
+      <created>1627187438052</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1627187438052</updated>
+    </task>
+    <task id="LOCAL-00009" summary="created maintenance page to store maintenance request to table 'maintenance'">
+      <created>1627187564684</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1627187564684</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added 'maintenance_redirect' and 'important_numbers' path">
+      <created>1627187635383</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1627187635383</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added links to maintenance and important_numbers page. Added 'logged in as' info">
+      <created>1627187792512</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1627187792512</updated>
+    </task>
+    <task id="LOCAL-00012" summary="minor changes in reslogin(added global user), added functions such as maintenance_redirect, maintenance, important_numbers">
+      <created>1627187957574</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1627187957574</updated>
+    </task>
+    <task id="LOCAL-00013" summary="adding new page : important_numbers.html">
+      <created>1627188062166</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1627188062166</updated>
+    </task>
+    <task id="LOCAL-00014" summary="deleted unwanted html pages such as &quot; login.html, maintanence.html, request.html, style.css&quot;">
+      <created>1627188142548</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1627188142548</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added amenities_redirect &amp; amenities_slot">
+      <created>1627515911859</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1627515911859</updated>
+    </task>
+    <task id="LOCAL-00016" summary="adding new page: amenities_reservation">
+      <created>1627519148417</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1627519148418</updated>
+    </task>
+    <task id="LOCAL-00017" summary="removed maintenance request link">
+      <created>1627519397029</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1627519397029</updated>
+    </task>
+    <task id="LOCAL-00018" summary="imported django messages, changes made in resident_register, reslogin, userpage, maintenance_redirect, payments_redirect&#10;Added amenities_redirect, amenities_slot">
+      <created>1627520365495</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1627520365495</updated>
+    </task>
+    <task id="LOCAL-00019" summary="removed maintenance request link from nav bar and fixed tag mismatch from FAQ.html">
+      <created>1627520911648</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1627520911648</updated>
+    </task>
+    <task id="LOCAL-00020" summary="added proper redirect links and changed the style">
+      <created>1627521252146</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1627521252147</updated>
+    </task>
+    <task id="LOCAL-00021" summary="correct redirect links and removed maintenance link from the page">
+      <created>1627522887589</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1627522887589</updated>
+    </task>
+    <task id="LOCAL-00022" summary="correct redirect links and changes maintenace request form and added request history">
+      <created>1627522958901</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1627522958901</updated>
+    </task>
+    <task id="LOCAL-00023" summary="correct redirect links and added user current requests to display on the page.">
+      <created>1627523030422</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1627523030424</updated>
+    </task>
+    <task id="LOCAL-00024" summary="minor important changes">
+      <created>1627524265423</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1627524265423</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added urls for register and login for employees and resident" />
+    <MESSAGE value="added reslogin, resident_register, employeelogin and employee_register functions" />
+    <MESSAGE value="minor changes" />
+    <MESSAGE value="login redirect done" />
+    <MESSAGE value="added static load for image display" />
+    <MESSAGE value="created maintenance page to store request to table 'maintenance'" />
+    <MESSAGE value="created maintenance page to store maintenance request to table 'maintenance'" />
+    <MESSAGE value="added 'maintenance_redirect' and 'important_numbers' path" />
+    <MESSAGE value="added links to maintenance and important_numbers page" />
+    <MESSAGE value="added links to maintenance and important_numbers page. Added 'logged in as' info" />
+    <MESSAGE value="minor changes in reslogin(added global user), added functions such as maintenance_redirect, maintenance, important_numbers" />
+    <MESSAGE value="adding new page : important_numbers.html" />
+    <MESSAGE value="deleted unwanted html pages such as &quot; login.html, maintanence.html, request.html, style.css&quot;" />
+    <MESSAGE value="removes maintenace page from amenities" />
+    <MESSAGE value="added amenities_redirect &amp; amenities_slot" />
+    <MESSAGE value="adding new page: amenities_reservation" />
+    <MESSAGE value="removed maintenance request link" />
+    <MESSAGE value="imported django messages, changes made in resident_register, reslogin, userpage, maintenance_redirect, payments_redirect&#10;Added amenities_redirect, amenities_slot" />
+    <MESSAGE value="removed maintenance request link from nav bar" />
+    <MESSAGE value="removed maintenance request link from nav bar and fixed tag mismatch from FAQ.html" />
+    <MESSAGE value="added proper redirect links and changed the style" />
+    <MESSAGE value="correct redirect links and removed maintenance link from the page" />
+    <MESSAGE value="correct redirect links and changes maintenace request form and added request history" />
+    <MESSAGE value="correct redirect links and added user current requests to display on the page." />
+    <MESSAGE value="minor important changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor important changes" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="681" y="368" key="#Notifications" timestamp="1627436115815">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="681" y="368" key="#Notifications/0.0.1920.1080@0.0.1920.1080" timestamp="1627436115815" />
+    <state x="-1472" y="51" key="#Project_Structure" timestamp="1627513800314">
+      <screen x="-1920" y="-67" width="1920" height="1080" />
+    </state>
+    <state x="-1472" y="51" key="#Project_Structure/0.0.1440.900/-1920.-67.1920.1080@-1920.-67.1920.1080" timestamp="1627513800314" />
+    <state x="448" y="118" key="#Project_Structure/0.0.1920.1080@0.0.1920.1080" timestamp="1627082045058" />
+    <state x="67" y="74" width="1024" height="640" key="DiffContextDialog" timestamp="1627523197691">
+      <screen x="0" y="25" width="1280" height="692" />
+    </state>
+    <state x="67" y="74" width="1024" height="640" key="DiffContextDialog/0.0.1280.800@0.0.1280.800" timestamp="1627522962791" />
+    <state x="100" y="100" width="1720" height="880" key="DiffContextDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1627245129426" />
+    <state x="67" y="74" width="1024" height="640" key="DiffContextDialog/0.25.1280.692@0.25.1280.692" timestamp="1627523197691" />
+    <state x="-1820" y="33" width="1720" height="880" key="DiffContextDialog/0.25.1440.792/-1920.-42.1920.1055@-1920.-42.1920.1055" timestamp="1627513568627" />
+    <state x="-1820" y="33" width="1720" height="880" key="DiffContextDialog/0.25.1440.875/-1920.-67.1920.1080@-1920.-67.1920.1080" timestamp="1627513368069" />
+    <state x="0" y="188" key="MergeDialog" timestamp="1627571178749">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="0" y="188" key="MergeDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1627571178749" />
+    <state x="-1920" y="234" key="MergeDialog/0.25.1440.875/-1920.-67.1920.1080@-1920.-67.1920.1080" timestamp="1627513484463" />
+    <state x="216" y="430" key="MultipleFileMergeDialog" timestamp="1627571178829">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="216" y="430" key="MultipleFileMergeDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1627571178829" />
+    <state x="-1704" y="363" key="MultipleFileMergeDialog/0.25.1440.875/-1920.-67.1920.1080@-1920.-67.1920.1080" timestamp="1627513484527" />
+    <state x="373" y="205" key="Vcs.Push.Dialog.v2" timestamp="1627524275044">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="373" y="205" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1627524275044" />
+    <state x="560" y="277" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1627152129195" />
+    <state x="659" y="295" width="602" height="490" key="find.popup" timestamp="1627412446994">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="659" y="295" width="602" height="490" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1627412446994" />
+    <state x="702" y="433" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1627079963041">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="702" y="433" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1627079963041" />
+    <state x="625" y="255" key="run.anything.popup" timestamp="1627428718591">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="625" y="255" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1627428718591" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
