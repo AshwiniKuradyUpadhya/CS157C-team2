@@ -193,18 +193,19 @@
 }
 #Logout2{
   top: 200px;
-  background-color: #2196F3;
+  background-color:  grey;
 }
 
 </style>
 
 </head>
-<h1>PAYMENT PORTAL {{user.renter_firstname}} {{user.renter_lastname}}</h1>
+<h1>Welcome {{user.username}} !!</h1>
 
 Rent Due: {{ property.rent }}
 <div id="Sidenav" class="Sidenav">
     <a id="rentDue">Rent Due:{{ property.rent }}</a>
     <a href="payment_redirect" id="Logout">Make Payment</a>
+    <a href="/" id="Logout2">Logout</a>
 </div>
 
 </body>
