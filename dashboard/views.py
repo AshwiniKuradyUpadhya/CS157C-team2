@@ -320,19 +320,17 @@ def maintenance(request):
     if request.method == 'POST':
         aptnum = int(request.POST['apartmentnum'])
         description = request.POST['request']
-        urgency = request.POST['select']
         table = dynamodb.Table('Maintenance')
         table.put_item(
             Item={
                 'property_id': aptnum,
                 'renter_id': user['renter_id'],
                 'request_description': description,
-                'urgency': urgency,
             }
         )
         response = table.get_item(
             Key={
-                'renter_id': "resident1",
+                'renter_id': user['renter_id'],
                 'property_id': aptnum,
             }
         )
