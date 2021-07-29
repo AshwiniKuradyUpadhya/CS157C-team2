@@ -355,7 +355,13 @@ def pay(request):
     print(user)
     scanres = dynamodb.Table('Property').scan(
     FilterExpression=Attr('property_id').eq(user['property_id']))
-    property = scanres['Items'][0]
+    if len(scanres['Items']) <= 0:
+        property = {
+            'rent' : 'No Rent'
+        }
+    else:
+        property = scanres['Items'][0]
+
     return render(request, 'portal/pay.html', {'user': user, 'property': property})
 
 def info(request):
