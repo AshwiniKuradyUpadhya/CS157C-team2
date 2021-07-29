@@ -157,50 +157,109 @@
 
     <div class="navbar-collapse">
         <ul class="navbar-nav mr-auto">
-            <li class="li nav-item"><a class="nav-link" href="/">HOME</a></li>
-            <li class="li nav-item"><a class="nav-link" href="amenities_reservation">AMENITIES RESERVATION</a></li>
-            <li class="li nav-item"><a class="nav-link" href="/userpage/payments">PAYMENTS</a></li>
-            <li class="li nav-item active"><a class="nav-link" href="/maintenance_redirect">MAINTENANCE REQUEST</a></li>
+            <li class="li nav-item"><a class="nav-link" href="amenities_redirect">AMENITIES RESERVATION</a></li>
+            <li class="li nav-item"><a class="nav-link" href="pay">PAYMENTS</a></li>
+            <li class="li nav-item active"><a class="nav-link" href="maintenance_redirect">MAINTENANCE REQUEST</a></li>
             <li class="li nav-item"><a class="nav-link" href="FAQ">FAQs</a></li>
-            <li class="li nav-item"><a class="nav-link" href="/important_numbers">CONTACT EMERGENCY SUPPORT</a></li>
+            <li class="li nav-item"><a class="nav-link" href="important_numbers">CONTACT EMERGENCY SUPPORT</a></li>
         </ul>
     </div>
 </nav>
 
-<ul class="navbar-nav navbar-right">
-    <button class="btn btn-light btn-md"><h3> Logged in as: </h3><p> {{ user.username }}</p></button>
-</ul>
+<!--################## Button style for Login and Logout and Request History ###################################################-->
 
+<style>
+#Sidenav a {
+  position: absolute;
+  right: -30px;
+  transition: 0.3s;
+  padding: 10px;
+  width: 200px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
 
+#Sidenav a:hover {
+  right: 30px;
+}
+
+#Login {
+  top: 100px;
+  background-color: #04AA6D;
+}
+
+#Logout {
+  top: 150px;
+  background-color: #2196F3;
+}
+
+#Logout2 {
+  top: 200px;
+  color: white;
+  background-color: grey;
+}
+
+</style>
+
+<div id="Sidenav" class="Sidenav">
+    <a href="#" id="Login">Login:{{ user.username }}</a>
+    <a href="/" id="Logout">Logout</a>
+    <a onclick="requesthistory()" class="Sidenav" id="Logout2">Request History</a>
+</div>
+
+<!--##################################################################################################################-->
 <div class="container">
     <form method = "post" action = "{% url 'maintenance' %}">{% csrf_token %}
 
-            <h4>What request can we help you with?</h4>
+        <h4>What request can we help you with?</h4>
 
-            <label for="apartmentnum"><b>Apartment number</b></label>
-            <input type="text" id="apartmentnum" placeholder="Enter your apartment number" name="apartmentnum" required>
-            <br>
-            <br>
-            <label for="request"><b>Maintenance Request description</b></label>
-            <input type="text" id="request" placeholder="raising maintenance request for pipeline issue" name="request" required>
-            <br>
-            <br>
-            <input type="radio" id="urgent" name="select">
-            <label for="urgent">This is Urgent</label>
-            <br>
-            <br>
-            <input type="radio" id="fewdays" name="select">
-            <label for="fewdays">Needs to be done In the next few days</label>
-            <br>
-            <br>
-            <input type="radio" id="twoweeks" name="select">
-            <label for="twoweeks">Can be done within the next two weeks</label>
-            <br>
-            <br>
-            <input type="submit" value="Submit">
+        <label for="apartmentnum"><b>Apartment number</b></label>
+        <input type="text" id="apartmentnum" placeholder="Enter your apartment number" name="apartmentnum" required>
+        <br>
+        <br>
+        <label for="request"><b>Maintenance Request description</b></label>
+        <input type="text" id="request" placeholder="raising maintenance request for pipeline issue" name="request" required>
+        <br>
+        <br>
+        <input type="submit" value="Submit">
 
     </form>
-
 </div>
+
+<div id="maintenanceTable" class="container" style="display:none">
+    <h2 class="text-center"><u>Request History</u></h2><br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Apartment</th>
+            <th>Request Description</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        {% for renter in renters %}
+        {% if renter.renter_id == user.renter_id %}
+        <tbody>
+        <tr>
+            <td>{{renter.property_id}}</td>
+            <td>{{renter.request_description}}</td>
+
+        </tr>
+        </tbody>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+
+<script>
+    function requesthistory() {
+      if(document.getElementById("maintenanceTable").style.display == 'block'){
+        document.getElementById("maintenanceTable").style.display = 'none'
+      } else {
+        document.getElementById("maintenanceTable").style.display = 'block'
+      }
+    }
+</script>
 </body>
 </html>
