@@ -288,7 +288,7 @@
         <tr>
           <td name="property_id">{{ property.property_id }}</td>
 		  <td name="rent">{{ property.rent }}</td>
-          <td name="renter_id">{{ property.renter_id }}</td>
+          <td name="username">{{ property.username }}</td>
           <td name="actionElements">
 			<button onclick="editRow(this)" class="btn btn-light btn-md" id="editBtn">Edit</button>
 			<form action="#" method="post">
@@ -387,6 +387,7 @@
 		console.log(that)
 		console.log($(this))
 		var row = that.closest('tr')
+		var tabledb = that.closest('div').getAttribute('id')
 		$(row).find('td').each(function(elm){
 			if($(this).attr('name') == 'actionElements'){
 				console.log(that.querySelector("#editBtn"))
@@ -397,7 +398,11 @@
 				 		<input type="submit" action="{% url 'saveRow' %}" onclick="saveRow(this)" class="btn btn-light btn-md" value="Save" name="save_btn" id="saveBtn">
 				 	`)
 			} else {
-				$(this).replaceWith('<td name="'+$(this).attr('name')+'"><input type="text" placeholder="'+$(this).text()+'"></td>')
+				if (tabledb == 'propertiestable' && $(this).attr('name') == 'username'){
+					//don't do anything to cell
+				} else {
+					$(this).replaceWith('<td name="'+$(this).attr('name')+'"><input type="text" placeholder="'+$(this).text()+'"></td>')
+				}
 			}
 		})
 	}
@@ -418,7 +423,10 @@
 				// 		<button onclick="editRow(this)" class="btn btn-light btn-md" id="editBtn">Edit</button>
 				// 	</td>`)
 			} else {
-				if ($(this).find('input')[0].value) {
+				if (tabledb == 'propertiestable' && $(this).attr('name') == 'username') {
+					//do nothing
+				}
+				else if ($(this).find('input')[0].value) {
 					console.log($(this).find('input')[0].value)
 					data[$(this).attr('name')] = $(this).find('input')[0].value
 					$(this).replaceWith('<td name="'+ $(this).find('input')[0].value+'">'+ $(this).find('input')[0].value+'</td>')

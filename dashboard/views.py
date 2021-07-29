@@ -221,8 +221,11 @@ def employeepage(request):
     documents = scanDocuments.get('Items')
     for r in renters:
         for p in properties:
-            if ('rent' in p) and r['property_id'] == p['property_id']:
-                r['rent'] = p['rent']
+            if r['property_id'] == p['property_id']:
+                p['username'] = r['username']
+                if 'rent' in p :
+                    r['rent'] = p['rent']
+            
 
     if('del_maint' in request.POST):
         print("Maintenance issue resolved.")
