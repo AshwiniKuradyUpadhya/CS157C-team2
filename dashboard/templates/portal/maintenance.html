@@ -238,7 +238,6 @@
         <tr>
             <th>Apartment</th>
             <th>Request Description</th>
-            <th>Status</th>
         </tr>
         </thead>
         {% for renter in renters %}
@@ -247,8 +246,16 @@
         <tr>
             <td>{{renter.property_id}}</td>
             <td>{{renter.request_description}}</td>
-
         </tr>
+        <td>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ renter.property_id }}" name="property_id"/>
+                <input type="hidden" value="{{ renter.request_description }}" name="request_description"/>
+                <input type="submit" class="btn" value="Resolve" name="del_amen">
+            </form>
+
+        </td>
         </tbody>
         {% endif %}
         {% endfor %}

@@ -26,4 +26,6 @@ urlpatterns = [
     path('amenities_slot', views.amenities_slot, name='amenities_slot'),
     path('Documents', views.Documents, name = 'Documents'),
     path('documentsUpload', views.documentsUpload, name = 'documentsUpload'),
+    path('paymentInfo', views.paymentInfo, name = 'paymentInfo'),
+    path('payment_redirect', views.payment_redirect, name='payment_redirect'),
 ]

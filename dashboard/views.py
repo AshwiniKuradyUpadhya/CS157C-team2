@@ -221,7 +221,7 @@ def employeepage(request):
     documents = scanDocuments.get('Items')
     for r in renters:
         for p in properties:
-            if hasattr(p, 'rent') and (r['property_id'] == p['property_id']):
+            if r['property_id'] == p['property_id']:
                 r['rent'] = p['rent']
 
     if('del_maint' in request.POST):
@@ -355,13 +355,7 @@ def pay(request):
     print(user)
     scanres = dynamodb.Table('Property').scan(
     FilterExpression=Attr('property_id').eq(user['property_id']))
-    if len(scanres['Items']) <= 0:
-        property = {
-            'rent' : 'No Rent'
-        }
-    else:
-        property = scanres['Items'][0]
-
+    property = scanres['Items'][0]
     return render(request, 'portal/pay.html', {'user': user, 'property': property})
 
 def info(request):
@@ -482,9 +476,6 @@ def amenities_slot(request):
 
 def important_numbers(request):
     return render(request, 'portal/important_numbers.html', {'user': user})
-
-def payments_redirect(request):
-    return render(request, 'portal/pay.html', {'user': user})
 
 def floorplans(request):
     return render(request, 'portal/floorplans.html')
