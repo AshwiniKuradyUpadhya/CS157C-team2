@@ -473,8 +473,6 @@ def index(request):
     return render(request, "index.html")
 
 def applyForApartment(request):
-    print("Breakpoint")
-
     if request.method == "POST":
         name = request.POST['name']
         email = request.POST['email']
@@ -496,3 +494,31 @@ def applyForApartment(request):
         print(item)
         return render(request, 'portal/floorplans.html')
     # return {"message": "submitted succesfully"}
+
+def Documents(request):
+    print('checking Documents function')
+    return render(request, 'portal/Documents.html')
+
+def documentsUpload(request):
+    if request.method == "POST":
+        current_add = request.POST['current_Address']
+        ssn = request.POST['ssn']
+        dlFile = request.POST['dlFile']
+        table = dynamodb.Table('DocumentData')
+        table.put_item(
+            Item={
+                'current_add': current_add,
+                'ssn': ssn,
+                'dlFile': dlFile,
+            }
+        )
+        response = table.get_item(
+            Key={
+                'ssn': ssn
+            }
+        )
+        item = response['Item']
+        print(current_add)
+        print(ssn)
+        print(dlFile)
+    return render(request, 'portal/Documents.html')
