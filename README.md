@@ -1,27 +1,33 @@
 # CS157C-team2
 
-## Info
+## Overview
+
+This is a housing website named as "The Sunshine" Apartments. The front end is designed by using HTML, CSS, Javascript. DynamoDB is chosen as a backend database and Server-side application is written in DJango(Python) framework. We used Boto3 libraries to communicate with Dynamo DB database to make the application responsive. The application is listening on local port: 8080 when we run the command for manage.py from the terminal.
+
+
+## Project Structure
+
 AWS CLI installed with aws configuration for dynamoDB webservices.
 
 By creating a Django project, Django creates a config directory for the project called "residential portal" which consists of files such as "_init_.py", "asgi.py", "settings.py", "urls.py", "wsgi.py"
 
 We created an app directory called "dashboard" which consists of all files required for the main application of our project such as "_init_.py", "admins.py", "apps.py", "models.py", "tests.py", "urls.py" and "view.py"
 
-dashboard/template/portal is where the .html files go. (Need to update img srcs with the django templating syntax)
-As of now, created .html files are as below:
+dashboard/template/portal is where the .html files go.
+.html files are as below:
 
 amenities.html
+amenities_reservation.html
 dashboard.html
-faq.html
+employeepage.html
+FAQ.html
 floorplans.html
 gallery.html
+importantn_numbers.html
 index.html
-info.html
-login.html(not in use as of now)
 maintenance.html
 pay.html
-request.html(copy of maintenance page -  not in use as of now)
-style.css( not in use - as of now)
+payment_redirect.html
 userpage.html
 
 
@@ -30,33 +36,70 @@ static/images/ is where images go. Syntax for images in .html is {% static '....
 <img src="{% static 'images/homemarquee4.png' %}" alt="first" style="width:100%;">
 ```
 
-Also need {% load static %} in .html document. Check out index.html for example.
-
 dashboard/views.py is where we load the different views with any backend functions.
 
 dashboard/urls.py is where we add our different paths.
 
-Connection usually follow the below path for the home page:
+Connection follows the below path for the home page:
+```
+residential portal/urls.py -> dashboard/urls.py -> '/' gets accessed from dashboard/views.py -> request is passed to "index.html"(home page)
+```
 
-residential portal/urls.py -> dashboard/urls.py -> 'index/' gets accessed from dashboard/views.py -> request is passed to "index.html"(home page)
+## Instructions:
+
+Download the file from Github and go to directory CS157C-team2
+
+Install Django:
+```
+pip3 install django 
+
+```
+
+Install Boto3:
+```
+pip3 install boto3
+```
+
+Install AWS:
+```
+$ pip3 install awscli --upgrade --user
+```
+
+Make sure to export the path to bash profile
+``` 
+Reference: https://docs.aws.amazon.com/cli/latest/userguide/install-macos.html#awscli-install-osx-path 
+```
 
 Start server on "localhost:8000" using 
-
 ```
 python manage.py runserver
-
 ```
 
-On browser -> go to path "localhost:8000/index/" [as of now 'index.html' is a home page]
+Open a web browser and navigate to local hosted server -> http://127.0.0.1:8000/ for the home page.
+
+## References:
+
+Following are a few websites that are being referred to build this website: 
+
+Frontend:
+```
+https://github.com/nehagadge/Login-Portal/blob/master/home.ejs 
+https://github.com/sniklaus/teaching-webdev
+```
+
+Django Framework - Server side application:
+```
+https://docs.djangoproject.com/en/3.2/
+```
+
+Boto3 Framework - Libraries to connect to DynamoDB:
+```
+https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html
+```
+
+AWS DynamoDB - Backend database:
+```
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithDynamo.html
+```
 
 
-## Current Progress:
-
-Created a table called Renter in DYnamoDB using Boto3 with render_id[Email ID] as Hash primary key and property_id[apartment_number] as Range primary key
-
-dashboard/views.py : added few more functions:
-			"register" function gets executed when user click on "register" button on the home page, with successful registeration -> redirected to userpage.html
-			"reslogin" function gets executed when user clicks on "resident login" button in home page, with successful login --> redirected to userpage.html
-
-User data is added to the table "Renter" when user clicks on "register" button and then redirects to userpage.html
-User data gets verified from the table "Renter" when user try to login through "reslogin" button and then redirects to userpage.html
