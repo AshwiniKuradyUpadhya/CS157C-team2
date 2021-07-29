@@ -520,7 +520,7 @@ def applyForApartment(request):
 
 def Documents(request):
     print('checking Documents function')
-    return render(request, 'portal/Documents.html')
+    return render(request, 'portal/Documents.html',{'user': user})
 
 def documentsUpload(request):
     if request.method == "POST":
@@ -544,4 +544,4 @@ def documentsUpload(request):
         print(current_add)
         print(ssn)
         print(dlFile)
-    return render(request, 'portal/Documents.html')
+    return render(request, 'portal/Documents.html',{'user': user})
