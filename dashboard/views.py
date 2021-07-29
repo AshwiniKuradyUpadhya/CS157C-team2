@@ -221,7 +221,7 @@ def employeepage(request):
     documents = scanDocuments.get('Items')
     for r in renters:
         for p in properties:
-            if r['property_id'] == p['property_id']:
+            if hasattr(p, 'rent') and (r['property_id'] == p['property_id']):
                 r['rent'] = p['rent']
 
     if('del_maint' in request.POST):
