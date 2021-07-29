@@ -221,19 +221,15 @@ def employeepage(request):
     documents = scanDocuments.get('Items')
     for r in renters:
         for p in properties:
-            if r['property_id'] == p['property_id']:
+            if ('rent' in p) and r['property_id'] == p['property_id']:
                 r['rent'] = p['rent']
 
     if('del_maint' in request.POST):
         print("Maintenance issue resolved.")
         deleteResponse = maintenanceTable.delete_item(
             Key={
-                'renter_id': request.POST['renter_id'],
+                'request_description': request.POST['req_desc'],
                 'property_id': int(request.POST['property_id'])
-            },
-            ConditionExpression="request_description=:req",
-            ExpressionAttributeValues={
-                ':req': request.POST['req_desc']
             }
         )
         scanMaintenanceRequest = maintenanceTable.scan(
@@ -327,7 +323,7 @@ def saveRow(request):
     elif data['table'] == 'propertiestable':
         # del tablename
         del data['table']
-        # get table key (Number)
+        # get table key (Number) in properties
         tableKey = int(data['property_id'])
         del data['property_id']
         updExpr = 'set '
