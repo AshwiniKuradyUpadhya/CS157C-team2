@@ -160,6 +160,7 @@
             <li class="li nav-item"><a class="nav-link" onclick="showTable('amenitiestable', this.id, this.name)" id ="nav-amen" name="Amenities">View Amenities</a></li>
             <li class="li nav-item"><a class="nav-link" onclick="showTable('maintenancetable', this.id, this.name)" id ="nav-maint" name="Maintenance Requests">View Maintenance Requests</a></li>
             <li class="li nav-item"><a class="nav-link" onclick="showTable('floorplanstable', this.id, this.name)" id ="nav-flpl" name="Interested Renters">View Interested Renters</a></li>
+            <li class="li nav-item"><a class="nav-link" onclick="showTable('documentstable', this.id, this.name)" id ="nav-docs" name="Documents">View Submitted Documents</a></li>
         </ul>
     </div>
 </nav>
@@ -330,6 +331,30 @@
                 <input type="submit" class="btn" value="Remove/Contacted" name="del_floorplan">
               </form>
 		  </td>
+
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+</div>
+
+<div id="documentstable" class="container" style="display:none">
+    <h2 class="text-center"><u>Contact Interested Renters</u></h2><br>            
+    <table class="table">
+      <thead>
+        <tr>
+          <th>SSN</th>
+		  <th>Current Address</th>
+          <th>File Location</th>
+        </tr>
+      </thead>
+      {% for doc in documents %}
+      <tbody>
+        <tr>
+          <td name="ssn">{{ doc.ssn }}</td>
+		  <td name="current_add">{{ doc.current_add }}</td>
+          <td name="dlFile">{{ doc.dlFile }}</td>
+          <td name="actionElements"></td>
 
         </tr>
       </tbody>

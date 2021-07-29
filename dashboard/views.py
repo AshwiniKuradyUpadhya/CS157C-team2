@@ -13,6 +13,8 @@ maintenanceTable = dynamodb.Table('Maintenance')
 amenitiesTable = dynamodb.Table('Amenities')
 propertyTable = dynamodb.Table('Property')
 floorplansTable = dynamodb.Table('floorplans')
+documentsTable = dynamodb.Table('DocumentData')
+
 
 
 def dashboard(request):
@@ -213,6 +215,10 @@ def employeepage(request):
         #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
     )
     floorplans = scanFloorplans.get('Items')
+    scanDocuments = documentsTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    documents = scanDocuments.get('Items')
     for r in renters:
         for p in properties:
             if r['property_id'] == p['property_id']:
@@ -262,7 +268,7 @@ def employeepage(request):
         )
         floorplans = scanFloorplans.get('Items')
 
-    return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance, 'amenities': amenities, 'floorplans': floorplans, 'properties':properties})
+    return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance, 'amenities': amenities, 'floorplans': floorplans, 'properties':properties, 'documents':documents})
 
 def saveRow(request):
     global user
