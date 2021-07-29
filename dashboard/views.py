@@ -271,8 +271,7 @@ def saveRow(request):
     global maintenanceTable
     global amenitiesTable
     global propertyTable
-
-    useTable = ''
+    global floorplansTable
 
     data = json.loads(json.dumps(request.POST))
     del data['csrfmiddlewaretoken']
@@ -320,8 +319,26 @@ def saveRow(request):
     elif data['table'] == 'amenitiestable':
         useTable = amenitiesTable
     elif data['table'] == 'propertiestable':
-        useTable = propertyTable
-
+        # del tablename
+        del data['table']
+        # get table key (Number)
+        tableKey = int(data['property_id'])
+        del data['property_id']
+        updExpr = 'set '
+        exprAttrVal = {}
+        for key in data:
+            updExpr += key + "=:" + key + ", "
+            exprAttrVal[":" + key ] = data[key]
+        updExpr = updExpr[:-2]
+        exprAttrVal[':rent'] = int(exprAttrVal[':rent'])
+        # update request to properties table
+        propertyTable.update_item(
+            Key={
+                'property_id': tableKey
+            },
+            UpdateExpression = updExpr,
+            ExpressionAttributeValues= exprAttrVal
+        )
 
     return render(request, "employeepage.html", {'user':user})
 
