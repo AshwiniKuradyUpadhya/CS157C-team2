@@ -26,10 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc434760-7277-47a4-877e-d31aab1db56c" name="Default Changelist" comment="added amenities_redirect &amp; amenities_slot">
-      <change beforePath="$PROJECT_DIR$/dashboard/templates/portal/amenities_reservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/templates/portal/amenities_reservations.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/templates/portal/maintenance.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/templates/portal/maintenance.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/templates/portal/pay.html" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/templates/portal/pay.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dashboard/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/dashboard/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

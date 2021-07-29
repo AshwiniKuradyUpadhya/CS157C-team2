@@ -348,6 +348,41 @@ def saveRow(request):
 
     return render(request, "employeepage.html", {'user':user})
 
+def payment_redirect(request):
+    global property
+    return render(request, 'portal/payment_redirect.html', {'user': user, 'property' : property})
+
+
+def paymentInfo(request):
+    # template = loader.get_template('./login.html')
+    global user
+    print("Here in payment too")
+    if request.method == 'POST':
+        cardholder = request.POST['cardholder']
+        cardnumber = request.POST['cardnumber']
+        verification = request.POST['verification']
+        custAmount = 12345
+        custAmount = request.POST['custAmount']
+        date = request.POST['date']
+        table = dynamodb.Table('Property')
+        table.put_item(
+            Item={
+                'custAmount': custAmount,
+                'property_id': user['property_id'],
+             }
+        )
+        response = table.get_item(
+            Key={
+                'property_id': user['property_id'],
+            }
+        )
+        item = response['Item']
+        print(item)
+
+        # return redirect("userpage")
+
+        return render(request, "portal/userpage.html", {'user': user})
+
 
 def pay(request):
     global property
@@ -355,7 +390,7 @@ def pay(request):
     print(user)
     scanres = dynamodb.Table('Property').scan(
     FilterExpression=Attr('property_id').eq(user['property_id']))
-    property = scanres['Items'][0]
+    # property = scanres['Items'][0]
     return render(request, 'portal/pay.html', {'user': user, 'property': property})
 
 def info(request):
