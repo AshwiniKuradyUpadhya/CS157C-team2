@@ -364,11 +364,15 @@ def paymentInfo(request):
         custAmount = request.POST['custAmount']
         date = request.POST['date']
         table = dynamodb.Table('Property')
-        table.put_item(
-            Item={
-                'custAmount': custAmount,
+
+        table.update_item(
+            Key={
                 'property_id': user['property_id'],
-             }
+            },
+            UpdateExpression='SET paymentAmount = :paymentAmount',
+            ExpressionAttributeValues={
+                ':paymentAmount': custAmount
+            }
         )
         response = table.get_item(
             Key={
@@ -389,7 +393,7 @@ def pay(request):
     print(user)
     scanres = dynamodb.Table('Property').scan(
     FilterExpression=Attr('property_id').eq(user['property_id']))
-    # property = scanres['Items'][0]
+    property = scanres['Items'][0]
     return render(request, 'portal/pay.html', {'user': user, 'property': property})
 
 def info(request):
