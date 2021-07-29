@@ -404,12 +404,26 @@ def maintenance_redirect(request):
         #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
     )
     renters = scanAllmaintenance.get('Items')
-    return render(request, 'portal/maintenance.html',{'user': user, 'renters': renters})
+    print("In redirect")
+    print(request.POST)
+    if('del_amen' in request.POST):
+        print("RESOLVED CLICKED RESOLVE CLICKED")
+        print(request.POST['request_description'])
+        deleteResponse = maintenanceTable.delete_item(
+            Key={
+            'property_id': int(request.POST['property_id']),
+            'request_description': request.POST['request_description']
+            },
+            )
+        # ConditionExpression="request_description = " + request.POST['req_desc']
+
+        return redirect('maintenance_redirect')
+    return render(request, 'portal/maintenance.html', {'user': user, 'renters' : renters})
+
 
 def maintenance(request):
     global user
     global maintenance
-    print(user['username'])
     if request.method == 'POST':
         aptnum = int(request.POST['apartmentnum'])
         description = request.POST['request']
@@ -423,7 +437,7 @@ def maintenance(request):
         )
         response = table.get_item(
             Key={
-                'renter_id': user['renter_id'],
+                'request_description': description,
                 'property_id': aptnum,
             }
         )
