@@ -246,7 +246,7 @@
         <br>
         <br>
         <label for="ssn"><b>Enter your last 4 digits of SSN number</b></label>
-        <input type="text" id="ssn" placeholder="SSN number" name="ssn" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+        <input type="text" id="ssn" placeholder="SSN number" name="ssn" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
         <br>
         <br>
         <label for="dlFile"><b>Upload your Driver's license</b></label>
