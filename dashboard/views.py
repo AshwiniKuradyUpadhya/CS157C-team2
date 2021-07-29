@@ -3,8 +3,8 @@ import json
 
 # Create your views here.
 import boto3
-from boto3.dynamodb.conditions import Attr
-
+from boto3.dynamodb.conditions import Key,Attr
+from django.contrib import messages
 
 user={}
 dynamodb = boto3.resource('dynamodb')
@@ -96,7 +96,7 @@ def resident_register(request):
         )
         item = response['Item']
         print(item)
-        return redirect("userpage")
+        return render(request, 'portal/index.html')
 
 def reslogin(request):
     # template = loader.get_template('./login.html')
@@ -120,7 +120,24 @@ def reslogin(request):
             )
         user = response['Item']
         # return redirect("userpage")
-        return render(request, "portal/userpage.html", {'user': user})
+
+        ################################################################################
+        # Added following section to display user reservations/requests on user homepage
+        amenitiesTable = dynamodb.Table('Amenities')
+        scanAllmaintenance = amenitiesTable.scan()
+        amenities = scanAllmaintenance.get('Items')
+        maintenanceTable = dynamodb.Table('Maintenance')
+        scanAllmaintenance = maintenanceTable.scan(
+            #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+        )
+        renters = scanAllmaintenance.get('Items')
+        print("Here")
+        print(request.POST)
+        # End of section
+        ################################################################################
+
+
+        return render(request, "portal/userpage.html", {'user': user, 'amenities': amenities, 'renters':renters})
 
 def employee_register(request):
     if request.method == "POST":
@@ -166,7 +183,7 @@ def employeelogin(request):
             #return render(request, 'portal/employeepage.html', {'user':user})
 
 def userpage(request):
-    return render(request, "userpage.html")
+    return render(request, "userpage.html", {'user': user})
 
 def employeepage(request):
     global user
@@ -287,7 +304,14 @@ def info(request):
     return render(request, 'portal/info.html')
 
 def maintenance_redirect(request):
-    return render(request, 'portal/maintenance.html',{'user': user})
+    global user
+
+    maintenanceTable = dynamodb.Table('Maintenance')
+    scanAllmaintenance = maintenanceTable.scan(
+        #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+    )
+    renters = scanAllmaintenance.get('Items')
+    return render(request, 'portal/maintenance.html',{'user': user, 'renters': renters})
 
 def maintenance(request):
     global user
@@ -314,11 +338,91 @@ def maintenance(request):
         )
         item = response['Item']
         print(item)
-        return render(request, 'userpage.html',{'user': user})
+        return redirect('maintenance_redirect')
+
+def amenities_redirect(request):
+    # retrieve the database for amenities request history and to redirect to amenities portal
+    amenitiesTable = dynamodb.Table('Amenities')
+    scanAllmaintenance = amenitiesTable.scan()
+    amenities = scanAllmaintenance.get('Items')
+    print("Here")
+    print(request.POST)
+    if('del_amen' in request.POST):
+        print("RESOLVED CLICKED RESOLVE CLICKED")
+        deleteResponse = amenitiesTable.delete_item(
+            Key={
+                'renter_id': request.POST['renter_id'],
+                'Reserved_area': request.POST['Reserved_area']
+            },
+            # ConditionExpression="request_description = " + request.POST['req_desc']
+        )
+        return redirect('amenities_redirect')
+
+    return render(request, 'portal/amenities_reservations.html', {'user': user, 'amenities': amenities})
+
+def amenities_slot(request):
+    global user
+
+    # Book plot for community_area, gym_area , pool_area
+
+    if 'book_slot_community_area' in request.POST:
+        area = 'community_area'
+        date = request.POST['slot']
+    elif 'book_slot_gym_area' in request.POST:
+        area = 'gym_area'
+        date = request.POST["gymslot"]
+    elif 'book_slot_pool_area' in request.POST:
+        area = 'pool_area'
+        date = request.POST["poolslot"]
+
+    amenitiesTable = dynamodb.Table('Amenities')
+    scanAllamenities = amenitiesTable.scan()
+    amenities = scanAllamenities.get('Items')
+    if (amenities == []):
+        amenitiesTable.put_item(
+            Item={
+                'renter_id': user['renter_id'],
+                'property_id': user['property_id'],
+                'Reserved_slot': date,
+                'Reserved_area': area,
+            }
+        )
+        response = amenitiesTable.get_item(
+            Key={
+                'renter_id': user['renter_id'],
+                'Reserved_area': area,
+            }
+        )
+        item = response['Item']
+        messages.success(request,"Plot is booked successfully", extra_tags=area)
+        return redirect('amenities_redirect')
+
+    for i in amenities:
+        if i['Reserved_slot'] == date and i['Reserved_area'] == area:
+            messages.error(request, 'slot is booked, please book for a different slot', extra_tags=area)
+            return redirect('amenities_redirect')
+    amenitiesTable.put_item(
+        Item={
+            'renter_id': user['renter_id'],
+            'property_id': user['property_id'],
+            'Reserved_slot': date,
+            'Reserved_area': area,
+        }
+    )
+    response = amenitiesTable.get_item(
+        Key={
+            'renter_id': user['renter_id'],
+            'Reserved_area' : area,
+        }
+    )
+    messages.success(request,"Plot is booked successfully", extra_tags=area)
+    return redirect('amenities_redirect')
 
 def important_numbers(request):
     return render(request, 'portal/important_numbers.html', {'user': user})
 
+def payments_redirect(request):
+    return render(request, 'portal/pay.html', {'user': user})
 
 def floorplans(request):
     return render(request, 'portal/floorplans.html')
