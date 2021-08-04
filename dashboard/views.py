@@ -164,7 +164,7 @@ def employee_register(request):
         )
         item = response['Item']
         print(item)
-        return redirect('userpage')
+        return redirect('employeepage')
 
 def employeelogin(request):
     global user
@@ -260,6 +260,17 @@ def employeepage(request):
         deleteResponse = floorplansTable.delete_item(
             Key={
                 'email_id': request.POST['eid'],
+            },
+        )
+        scanFloorplans = floorplansTable.scan(
+            #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
+        )
+        floorplans = scanFloorplans.get('Items')
+    elif('del_property' in request.POST):
+        print("Deleting Property...")
+        deleteResponse = propertyTable.delete_item(
+            Key={
+                'property_id': int(request.POST['pid']),
             },
         )
         scanFloorplans = floorplansTable.scan(
