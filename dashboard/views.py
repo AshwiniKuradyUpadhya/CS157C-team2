@@ -273,10 +273,10 @@ def employeepage(request):
                 'property_id': int(request.POST['pid']),
             },
         )
-        scanFloorplans = floorplansTable.scan(
+        scanProperties = propertyTable.scan(
             #ProjectionExpression= HANDLE PROJECTION HERE OR IN HTML
         )
-        floorplans = scanFloorplans.get('Items')
+        properties = scanProperties.get('Items')
 
     return render(request, "employeepage.html", {'user':user, 'renters': renters, 'maintenance': maintenance, 'amenities': amenities, 'floorplans': floorplans, 'properties':properties, 'documents':documents})
 
